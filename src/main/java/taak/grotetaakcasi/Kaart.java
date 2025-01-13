@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Kaart {
+    // private attributes:
     private String symbool;
     private String nummer;
 
