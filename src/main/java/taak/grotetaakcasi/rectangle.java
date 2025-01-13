@@ -5,9 +5,9 @@
 package taak.grotetaakcasi;
 
 /**
- *
  * @author timar
  */
+
 class rectangle {
     
 }
