@@ -1,6 +1,9 @@
 package taak.grotetaakcasi;
 
 import javafx.scene.image.Image;
+import taak.grotetaakcasi.App;
+import taak.grotetaakcasi.PakKaarten;
+import taak.grotetaakcasi.SpelerEnDealer;
 
 public class BlackJackModel {
     private SpelerEnDealer speler;
@@ -34,19 +37,23 @@ public class BlackJackModel {
         }
     }
 
-    public String bepaalUitslag() {
+    public String bepaalUitslag(double inzet) {
         int spelerScore = speler.berekenWaardeHand();
         int dealerScore = dealer.berekenWaardeHand();
+        String uitslag = ""; 
 
         if (dealerScore > 21 || spelerScore > dealerScore) {
             App.getBedragen().voegBedragToe(inzet * 2); 
-            return "Je wint!";
-        } else if (dealerScore > spelerScore) {
-            return "De dealer wint.";
-        } else {
+            uitslag = "Je wint!";
+        } else if (dealerScore == spelerScore) {
             App.getBedragen().voegBedragToe(inzet);  
-            return "Het is een gelijkspel.";
+            uitslag = "Het is een gelijkspel.";
+        } else {
+            App.getBedragen().geldInnen(inzet);  
+            uitslag = "De dealer wint.";
         }
+
+        return uitslag; 
     }
 
     public boolean isInzetGeldig(double inzet) {
@@ -77,4 +84,13 @@ public class BlackJackModel {
     public Image getDealerKaart(int index) {
         return dealer.getHand().get(index).getAfbeelding();
     }
+    
+    public int getSpelerHandGrootte() {
+    return speler.getHand().size();
+}
+
+    public int getDealerHandGrootte() {
+        return dealer.getHand().size();
+    }
+
 }
