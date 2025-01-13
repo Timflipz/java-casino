@@ -17,6 +17,22 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.util.Random;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
 
 public class HogerLagerMenuController {
     @FXML
@@ -29,16 +45,7 @@ public class HogerLagerMenuController {
     private ImageView AfbeeldingOnder;
     
     @FXML
-    private ImageView AfbeeldingHarten;
-
-    @FXML
-    private ImageView AfbeeldingKlaveren;
-
-    @FXML
-    private ImageView AfbeeldingKoeken;
-
-    @FXML
-    private ImageView AfbeeldingSchuppen;
+    private ImageView AfbeeldingKaarten;
     @FXML
     private Pane BeginScherm;
 
@@ -98,37 +105,10 @@ public class HogerLagerMenuController {
     private int huidigGetal; 
     
     private final Random random = new Random();
-    
-@FXML
-    private ImageView AfbeeldingSchoppen;
-
-    private final String IMAGE_PATH = "images/";
-
-    
-    private void toonKaarten() {
-        
-        loadCardImages(AfbeeldingHarten, "harten");
-        loadCardImages(AfbeeldingKlaveren, "klaveren");
-        loadCardImages(AfbeeldingKoeken, "koeken");
-        loadCardImages(AfbeeldingSchoppen, "schoppen");
-    }
-
-    
-    private void loadCardImages(ImageView imageView, String suit) {
-        
-        for (int i = 1; i <= 13; i++) {
-            Image cardImage = new Image(IMAGE_PATH + suit + i + ".png"); 
-            imageView.setImage(cardImage); 
-        }
-    }
-
-    @FXML
-    void genereerKaarten(ActionEvent event) {
-        // Genereer de kaarten voor alle vier de suites
-        toonKaarten();
-    }
+   
     @FXML
     void HogerKnop(ActionEvent event) {
+        
         speelButton.setDisable(false);
         hogerButton.setDisable(true);
         lagerButton.setDisable(true);
@@ -218,27 +198,27 @@ public class HogerLagerMenuController {
     void initialize() {
         
         // Laad de afbeeldingen vanuit de resources-map
-    Image imageBoven = new Image(getClass().getResourceAsStream("/images/1.png"));
-    Image imageMidden = new Image(getClass().getResourceAsStream("/images/1.png"));
-    Image imageOnder = new Image(getClass().getResourceAsStream("/images/1.png"));
+        Image imageBoven = new Image(getClass().getResourceAsStream("/images/1.png"));
+        Image imageMidden = new Image(getClass().getResourceAsStream("/images/1.png"));
+        Image imageOnder = new Image(getClass().getResourceAsStream("/images/1.png"));
 
-    // Koppel de afbeeldingen aan de ImageView-componenten
-    AfbeeldingBoven.setImage(imageBoven);
-    AfbeeldingMidden.setImage(imageMidden);
-    AfbeeldingOnder.setImage(imageOnder);
+        // Koppel de afbeeldingen aan de ImageView-componenten
+        AfbeeldingBoven.setImage(imageBoven);
+        AfbeeldingMidden.setImage(imageMidden);
+        AfbeeldingOnder.setImage(imageOnder);
 
-    // (Optioneel) Schaal de afbeeldingen om in de beschikbare ruimte te passen
-    AfbeeldingBoven.setFitWidth(100);
-    AfbeeldingBoven.setFitHeight(150);
-    AfbeeldingBoven.setPreserveRatio(true);
+        // (Optioneel) Schaal de afbeeldingen om in de beschikbare ruimte te passen
+        AfbeeldingBoven.setFitWidth(100);
+        AfbeeldingBoven.setFitHeight(150);
+        AfbeeldingBoven.setPreserveRatio(true);
 
-    AfbeeldingMidden.setFitWidth(100);
-    AfbeeldingMidden.setFitHeight(150);
-    AfbeeldingMidden.setPreserveRatio(true);
+        AfbeeldingMidden.setFitWidth(100);
+        AfbeeldingMidden.setFitHeight(150);
+        AfbeeldingMidden.setPreserveRatio(true);
 
-    AfbeeldingOnder.setFitWidth(100);
-    AfbeeldingOnder.setFitHeight(150);
-    AfbeeldingOnder.setPreserveRatio(true);
+        AfbeeldingOnder.setFitWidth(100);
+        AfbeeldingOnder.setFitHeight(150);
+        AfbeeldingOnder.setPreserveRatio(true);
         
         BeginScherm.toFront();
         BeginScherm.setVisible(true);
@@ -337,8 +317,3 @@ public class HogerLagerMenuController {
     }
    
 }
-
-    
-    
-
-
