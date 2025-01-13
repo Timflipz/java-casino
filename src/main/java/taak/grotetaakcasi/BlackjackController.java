@@ -17,9 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import taak.grotetaakcasi.App;
-import taak.grotetaakcasi.PakKaarten;
-import taak.grotetaakcasi.SpelerEnDealer;
+
 
 public class BlackjackController implements Initializable {
     private PakKaarten pakKaarten;

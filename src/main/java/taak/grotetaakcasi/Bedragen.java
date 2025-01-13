@@ -19,3 +19,4 @@ public class Bedragen {
         return totaalBudget;
     }
 }
+
