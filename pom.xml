@@ -86,4 +86,5 @@
             </plugin>
         </plugins>
     </build>
+    <name>GroteTaakCasi-github</name>
 </project>
