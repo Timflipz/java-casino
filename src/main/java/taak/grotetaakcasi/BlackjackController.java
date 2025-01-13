@@ -178,8 +178,10 @@ public class BlackjackController implements Initializable {
             }
         }
 
+        
         if (speler.berekenWaardeHand() > 21) {
             uitslagLabel.setText("De dealer wint.");
+            hitKnop.setDisable(true);
             volgendSpel();
         }
     }
