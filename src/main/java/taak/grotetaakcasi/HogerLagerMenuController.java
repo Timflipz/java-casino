@@ -1,22 +1,5 @@
 package taak.grotetaakcasi;
 
-import javafx.util.Duration; 
-import java.util.Random;
-import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-
 import java.util.Random;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -46,6 +29,7 @@ public class HogerLagerMenuController {
     
     @FXML
     private ImageView AfbeeldingKaarten;
+    
     @FXML
     private Pane BeginScherm;
 
@@ -113,7 +97,7 @@ public class HogerLagerMenuController {
         hogerButton.setDisable(true);
         lagerButton.setDisable(true);
         
-        genereerVolgendeKaart();
+      
         if (huidigGetal > vorigGetal) {
             randomGetal.setText("Nieuw getal: " + huidigGetal);
             JuistFout.setText("Correct!");
@@ -144,7 +128,7 @@ public class HogerLagerMenuController {
             
         }
         InzetOnthouden.setText("Inzet: " + inzetBedrag + " Totaal: "+ totaalBedrag);
-        updateKaart();        
+               
     }
     
        
@@ -155,7 +139,7 @@ public class HogerLagerMenuController {
         hogerButton.setDisable(true);
         lagerButton.setDisable(true);
         
-        genereerVolgendeKaart();
+        
         
         if (huidigGetal < vorigGetal) 
         {
@@ -190,7 +174,7 @@ public class HogerLagerMenuController {
         }
         
         InzetOnthouden.setText("Inzet: " + inzetBedrag + " Totaal: "+ totaalBedrag);   
-        updateKaart();
+        
     
     }
     
@@ -266,13 +250,6 @@ public class HogerLagerMenuController {
         
     }
 
-    private void genereerVolgendeKaart() {        
-        huidigGetal = random.nextInt(13) + 1;
-    }
-
-    private void updateKaart() {
-        vorigGetal = huidigGetal;
-    }
     
     void verplaatsAfbeelding() {
     
