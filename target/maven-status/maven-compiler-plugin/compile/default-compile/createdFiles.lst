@@ -1,5 +1,4 @@
 taak\grotetaakcasi\Kaart.class
-hogerLager\HogerlagerController.class
 taak\grotetaakcasi\App1.class
 taak\grotetaakcasi\BlackjackController$1.class
 taak\grotetaakcasi\SpelerEnDealer.class
@@ -9,7 +8,8 @@ taak\grotetaakcasi\SpeelbordController.class
 taak\grotetaakcasi\App.class
 module-info.class
 taak\grotetaakcasi\Verplaatsen.class
-hogerLager\HogerLagerMenuController.class
+taak\grotetaakcasi\HogerLagerMenuController.class
 taak\grotetaakcasi\TafelController.class
 taak\grotetaakcasi\PakKaarten.class
 taak\grotetaakcasi\BlackJackModel.class
+taak\grotetaakcasi\HogerlagerController.class

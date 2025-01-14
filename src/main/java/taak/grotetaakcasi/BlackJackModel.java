@@ -16,8 +16,15 @@ public class BlackJackModel {
         dealer = new SpelerEnDealer();
         pakKaarten = new PakKaarten();
     }
+    
+    public void nieuwPakWanneerLeeg(){
+        if (pakKaarten.getAantalKaarten()<4){
+            this.pakKaarten = new PakKaarten();
+        }
+    }
 
     public void startGame() {
+        nieuwPakWanneerLeeg();
         pakKaarten.kaartenSchudden();
         speler.resetHand();
         dealer.resetHand();
@@ -69,7 +76,7 @@ public class BlackJackModel {
         return speler.berekenWaardeHand() > 21;
     }
 
-    public void resetGame() {
+    public void reset() {
         startGame();
     }
 
@@ -83,6 +90,11 @@ public class BlackJackModel {
 
     public Image getDealerKaart(int index) {
         return dealer.getHand().get(index).getAfbeelding();
+    }
+    
+    public Image getOmgekeerdeKaartAfbeelding() {
+        String afb = "/afbeeldingen/OmgekeerdeKaart.png";
+        return new Image(getClass().getResourceAsStream(afb));
     }
     
     public int getSpelerHandGrootte() {

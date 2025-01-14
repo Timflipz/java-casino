@@ -36,7 +36,7 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-      <Label fx:id="dealerKaartenLabel" depthTest="DISABLE" layoutX="54.0" layoutY="87.0" prefHeight="35.0" prefWidth="168.0" text="Kaarten dealer:" textFill="WHITE">
+      <Label fx:id="dealerKaartenLabel" depthTest="DISABLE" layoutX="60.0" layoutY="87.0" prefHeight="35.0" prefWidth="168.0" text="Kaarten dealer:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font></Label>
@@ -51,20 +51,9 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="afbeeldingSpeler" fitHeight="123.0" fitWidth="87.0" layoutX="66.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingSpeler2" fitHeight="123.0" fitWidth="87.0" layoutX="159.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingSpeler3" fitHeight="123.0" fitWidth="87.0" layoutX="266.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingSpeler4" fitHeight="123.0" fitWidth="87.0" layoutX="365.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingDealer" fitHeight="123.0" fitWidth="87.0" layoutX="66.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingDealer2" fitHeight="123.0" fitWidth="87.0" layoutX="153.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingDealer3" fitHeight="123.0" fitWidth="87.0" layoutX="266.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingDealer4" fitHeight="123.0" fitWidth="87.0" layoutX="350.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingSpeler5" fitHeight="123.0" fitWidth="87.0" layoutX="459.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingDealer5" fitHeight="123.0" fitWidth="87.0" layoutX="459.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
+      
       <Label fx:id="sout" layoutX="66.0" layoutY="482.0" prefHeight="17.0" prefWidth="479.0" />
-      <ImageView fx:id="pakje1" fitHeight="150.0" fitWidth="87.0" layoutX="522.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="pakje2" fitHeight="150.0" fitWidth="87.0" layoutX="503.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="pakje3" fitHeight="150.0" fitWidth="87.0" layoutX="479.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
+      
    </children>
    <cursor>
       <Cursor fx:constant="DEFAULT" />

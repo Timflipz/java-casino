@@ -35,6 +35,7 @@ public class Kaart {
         String afb = "/afbeeldingen/" + symbool + "_" + nummer + ".png";
         return new Image(getClass().getResourceAsStream(afb));
     }
+         
     
     public String toString() {
         return symbool + " " + nummer;
