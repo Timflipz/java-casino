@@ -73,13 +73,16 @@ public class BlackjackController implements Initializable {
         roofView.getChildren().add(tafel);
         tafel.toBack();
         
-        ImageView stapelAfbeelding = new ImageView();
-        stapelAfbeelding.setLayoutX(500);
-        stapelAfbeelding.setLayoutY(122);
-        stapelAfbeelding.setFitHeight(123.0);
-        stapelAfbeelding.setFitWidth(87.0);
-        stapelAfbeelding.setImage(new Image(getClass().getResourceAsStream("/afbeeldingen/OmgekeerdeKaart.png")));
-        roofView.getChildren().add(stapelAfbeelding);
+        for (int i = 0; i < 3; i++) {
+            ImageView stapelAfbeelding = new ImageView();
+            stapelAfbeelding.setLayoutX(500 - (i * 10));  // Verschillende X-waarden
+            stapelAfbeelding.setLayoutY(122);
+            stapelAfbeelding.setFitHeight(123.0);
+            stapelAfbeelding.setFitWidth(87.0);
+            stapelAfbeelding.setImage(new Image(getClass().getResourceAsStream("/afbeeldingen/OmgekeerdeKaart.png")));
+            roofView.getChildren().add(stapelAfbeelding);
+        }
+
 
         spelerImageViews = imageViewLijst(5, 66, 290, 93);
         dealerImageViews = imageViewLijst(5, 66, 122, 93);
@@ -143,9 +146,6 @@ public class BlackjackController implements Initializable {
 
         volgendSpel();
     }
-
-
-    
 
     @FXML
     public void inzetten(ActionEvent event) throws IOException {
@@ -221,4 +221,6 @@ public class BlackjackController implements Initializable {
         }
         return imageViews;
     }
+    
+    
 }

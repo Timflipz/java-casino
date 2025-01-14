@@ -39,6 +39,7 @@ public class BlackJackModel {
     }
 
     public void dealerSpelen() {
+        
         while (dealer.berekenWaardeHand() < 17) {
             dealer.voegKaartToe(pakKaarten.trekKaart());
         }
