@@ -118,6 +118,7 @@ public class BlackjackController implements Initializable {
     @FXML
     public void hitten(ActionEvent event) {
         
+        model.nieuwPakWanneerLeeg();
         model.spelerTrekKaart();
         updateUI();
 
@@ -126,18 +127,25 @@ public class BlackjackController implements Initializable {
             volgendSpel();
         }
     }
-
+    
     @FXML
     public void standen(ActionEvent event) {
-        
-        dealerImageViews[0].setImage(null);
         dealerImageViews[0].setImage(model.getDealerKaart(0));
+
         model.dealerSpelen();
         updateUI();
-        model.bepaalUitslag(Double.parseDouble(inzetText.getText()));
-        uitslagLabel.setText(model.bepaalUitslag(Double.parseDouble(inzetText.getText())));
+
+        double inzet = Double.parseDouble(inzetText.getText());
+        String uitslag = model.bepaalUitslag(inzet);
+
+        uitslagLabel.setText(uitslag);
+        budgetBlackJackLabel.setText("Budget: " + model.getBudget());
+
         volgendSpel();
     }
+
+
+    
 
     @FXML
     public void inzetten(ActionEvent event) throws IOException {

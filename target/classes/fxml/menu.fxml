@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taak.grotetaakcasi.SpeelbordController">
    <children>
-      <Label fx:id="algemeenBudgetLabel" layoutX="29.0" layoutY="26.0" prefHeight="27.0" prefWidth="190.0" text="Budget: ">
+      <Label fx:id="algemeenBudgetLabel" layoutX="14" layoutY="14" prefHeight="27.0" prefWidth="190.0" text="Budget: ">
          <font>
             <Font size="18.0" />
          </font>

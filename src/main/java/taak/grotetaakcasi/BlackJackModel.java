@@ -55,9 +55,8 @@ public class BlackJackModel {
         } else if (dealerScore == spelerScore) {
             App.getBedragen().voegBedragToe(inzet);  
             uitslag = "Het is een gelijkspel.";
-        } else {
-            App.getBedragen().geldInnen(inzet);  
-            uitslag = "De dealer wint.";
+        }else{
+            uitslag = "De dealer wint";
         }
 
         return uitslag; 
