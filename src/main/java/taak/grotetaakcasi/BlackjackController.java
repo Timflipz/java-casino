@@ -24,6 +24,8 @@ import javafx.util.Duration;
 
 public class BlackjackController implements Initializable {
     private BlackJackModel model;
+    private BlackJackView blackjackview;
+    private KaartView kaartView;
 
     @FXML
     private Label sout;
@@ -71,25 +73,16 @@ public class BlackjackController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model = new BlackJackModel();
-        budgetBlackJackLabel.setText("Budget: " + model.getBudget());
+        blackjackview = new BlackJackView(roofView);
 
-        Rectangle tafel = new Rectangle(0, 90, 640, 590);
-        tafel.setFill(Color.GREEN);
-        roofView.getChildren().add(tafel);
-        tafel.toBack();
+        blackjackview.maakTafel();
+        blackjackview.voegPakKaartenToe();
+
+        spelerImageViews = blackjackview.maakImageViewLijst(10, 66, 290, 93);
+        dealerImageViews = blackjackview.maakImageViewLijst(10, 66, 122, 93);
+        dealerImageViews.get(0).setImage(model.getOmgekeerdeKaartAfbeelding());
         
-        for (int i = 0; i < 3; i++) {
-            ImageView stapelAfbeelding = new ImageView();
-            stapelAfbeelding.setLayoutX(500 - (i * 10));  
-            stapelAfbeelding.setLayoutY(122);
-            stapelAfbeelding.setFitHeight(123.0);
-            stapelAfbeelding.setFitWidth(87.0);
-            stapelAfbeelding.setImage(new Image(getClass().getResourceAsStream("/afbeeldingen/OmgekeerdeKaart.png")));
-            roofView.getChildren().add(stapelAfbeelding);
-        }
-
-        spelerImageViews = maakImageViewLijst(10, 66, 290, 93);
-        dealerImageViews = maakImageViewLijst(10, 66, 122, 93);
+        kaartView = new KaartView(roofView, blackjackview, model, spelerImageViews, dealerImageViews);
 
         hitKnop.setDisable(true);
         standKnop.setDisable(true);
@@ -99,13 +92,11 @@ public class BlackjackController implements Initializable {
 
         dealerKaartenLabel.setVisible(true);
         spelersKaartenLabel.setVisible(true);
+        
+        budgetBlackJackLabel.setText("Budget: " + model.getBudget());
 
         model.startGame();
-        kaartenToevoegen();
-
-        dealerImageViews.get(0).setImage(model.getOmgekeerdeKaartAfbeelding());
-        
-        
+        kaartView.kaartenToevoegenAanAfbeeldingenlijst();
     }
 
     @FXML
@@ -113,114 +104,57 @@ public class BlackjackController implements Initializable {
         App.setRoot("menu");
     }
     
-    public void kaartBeweging(ImageView kaart,double eindX, double eindY, double duurInSeconden) {
-        kaart.setLayoutX(500);
-        kaart.setLayoutY(122);
-        kaart.setFitWidth(87);  
-        kaart.setFitHeight(123);
-
-        TranslateTransition animatie = new TranslateTransition();
-        animatie.setNode(kaart);
-        animatie.setDuration(Duration.seconds(duurInSeconden));
-        animatie.setByX(eindX - 500);
-        animatie.setByY(eindY - 122);
-
-        animatie.setOnFinished(event -> {
-            kaart.setTranslateX(0);
-            kaart.setTranslateY(0);
-            kaart.setLayoutX(eindX);
-            kaart.setLayoutY(eindY);
-            roofView.getChildren().remove(kaart);
-            kaartenZichtbaarMaken();
-        });
-
-        animatie.play();
-    }
-
-    
     @FXML
-    
     public void inzetten(ActionEvent event) throws IOException {
         double inzet = Double.parseDouble(inzetText.getText());
         if (model.isInzetGeldig(inzet)) {
             model.setInzet(inzet);
+            
             inzetLabel.setText("Inzet: " + inzet);
             budgetBlackJackLabel.setText("Budget: " + model.getBudget());
+            
             hitKnop.setDisable(false);
             standKnop.setDisable(false);
-            dealerImageViews.get(0).setVisible(true);
 
-            for (int i = 0; i < 2; i++) {
-                ImageView kaart = new ImageView();
-                kaart.setImage(model.getSpelerKaart(i));
-                roofView.getChildren().add(kaart);
-
-                double eindX = 66 + i * 93;
-                double eindY = 290; 
-
-                kaartBeweging(kaart, eindX, eindY, 0.5);
-            }
-
-            ImageView Omgekeerdekaart = new ImageView();
-            Omgekeerdekaart.setImage(model.getOmgekeerdeKaartAfbeelding());
-            roofView.getChildren().add(Omgekeerdekaart);
-            Omgekeerdekaart.setFitWidth(87); 
-            Omgekeerdekaart.setFitHeight(123);
-            double eindX = 66;  
-            double eindY = 122; 
-            kaartBeweging(Omgekeerdekaart, eindX, eindY, 0.5);
-
-            ImageView kaart = new ImageView();
-            kaart.setImage(model.getDealerKaart(1));
-            roofView.getChildren().add(kaart);
-            kaart.setFitWidth(87); 
-            kaart.setFitHeight(123);
-            double eindX2 = 66 + 93;  
-            double eindY2 = 122; 
-            kaartBeweging(kaart, eindX2, eindY2, 0.5);
+            kaartView.beginSpelNaInzetten();
             
-            kaartenToevoegen();
+            kaartView.kaartenToevoegenAanAfbeeldingenlijst();
 
         } else {
             App.setRoot("Tafel");
         }
     }
     
-        @FXML
+    @FXML
     public void hitten(ActionEvent event) {
         model.nieuwPakWanneerLeeg();
         model.spelerTrekKaart();
-        kaartenToevoegen();
+        kaartView.kaartenToevoegenAanAfbeeldingenlijst();
         
         if (model.isSpelerBoven21()) {
             double inzet = Double.parseDouble(inzetText.getText());
             String uitslag = model.bepaalUitslag(inzet);
             uitslagLabel.setText(uitslag);
-            dealerImageViews.get(0).setImage(model.getDealerKaart(0));
+            dealerImageViews.get(0).setImage(model.getDealerKaartAfbeelding(0));
             hitKnop.setDisable(true);
             standKnop.setDisable(true);
             volgendSpelMetTijd();
         }
-
-        ImageView nieuweKaart = new ImageView();
-        nieuweKaart.setImage(model.getSpelerKaart(model.getSpelerHandGrootte() - 1));
-
-        roofView.getChildren().add(nieuweKaart); 
-
-        double eindX = 66 + (model.getSpelerHandGrootte() - 1) * 93;
-        double eindY = 290; 
-
-        kaartBeweging(nieuweKaart,eindX, eindY, 0.5); 
+        
+        kaartView.toonNieuweKaart(model.getSpelerHandGrootte()); 
 
     }
 
     @FXML
     public void standen(ActionEvent event) {
-        dealerImageViews.get(0).setImage(model.getDealerKaart(0));
+        dealerImageViews.get(0).setImage(model.getDealerKaartAfbeelding(0));
 
         model.dealerSpelen();
-        kaartenToevoegen();
-        kaartenZichtbaarMaken();
+        kaartView.kaartenToevoegenAanAfbeeldingenlijst();
+        kaartView.kaartenZichtbaarMaken(model.getSpelerHandGrootte(),
+                                            model.getDealerHandGrootte(),
+                                            spelerImageViews,
+                                            dealerImageViews);
 
         double inzet = Double.parseDouble(inzetText.getText());
         String uitslag = model.bepaalUitslag(inzet);
@@ -230,58 +164,9 @@ public class BlackjackController implements Initializable {
         volgendSpelMetTijd();
     }
     
-    public void kaartenZichtbaarMaken(){
-        for (int i = 0; i < spelerImageViews.size(); i++) {
-            if (i < model.getSpelerHandGrootte()) { 
-                spelerImageViews.get(i).setVisible(true);
-            }
-        }
-        
-        for (int i = 0; i < dealerImageViews.size(); i++) {
-            if (i < model.getDealerHandGrootte()) { 
-                dealerImageViews.get(i).setVisible(true);
-            }
-        }
-    }
-
-
-    public void kaartenToevoegen() {
-        
-        for (int i = 0; i < spelerImageViews.size(); i++) {
-            if (i < model.getSpelerHandGrootte()) {
-                if (!spelerImageViews.get(i).isVisible()){   
-                    spelerImageViews.get(i).setImage(model.getSpelerKaart(i));
-                    spelerImageViews.get(i).setVisible(false);
-                } 
-            }
-        }
-        
-        for (int i = 1; i < dealerImageViews.size(); i++) {
-            if (i < model.getDealerHandGrootte()) {
-                if (!dealerImageViews.get(i).isVisible()){
-                    dealerImageViews.get(0).setVisible(false);
-                    dealerImageViews.get(i).setImage(model.getDealerKaart(i));
-                     dealerImageViews.get(i).setVisible(false);
-                }
-            }
-        }
-
-     
-        uitslagLabel.setText("");
-    }
-    
-    public void volgendSpel(){
+    public void volgendSpel() {
         model.startGame();
-
-        dealerImageViews.get(0).setImage(model.getOmgekeerdeKaartAfbeelding());
-
-        for (int i = 0; i < spelerImageViews.size(); i++) {
-            spelerImageViews.get(i).setVisible(false);
-        }
-        
-        for (int i = 0; i < dealerImageViews.size(); i++) {
-            dealerImageViews.get(i).setVisible(false);
-        }
+        kaartView.resetSpel();
 
         uitslagLabel.setText("");     
         inzetText.setText("");
@@ -291,31 +176,18 @@ public class BlackjackController implements Initializable {
         standKnop.setDisable(true);
         hitKnop.toFront();
         standKnop.toFront();
-        
     }
 
     public void volgendSpelMetTijd() {
-        PauseTransition pause = new PauseTransition(Duration.seconds(3));
-
-        pause.setOnFinished(event -> volgendSpel());
-
-        pause.play();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    volgendSpel();
+                    timer.cancel();
+                });
+            }
+        }, 3000); 
     }
-
-    public ArrayList<ImageView> maakImageViewLijst(int aantal, double startX, double startY, double tussenruimte) {
-        ArrayList<ImageView> imageViews = new ArrayList<>();
-        for (int i = 0; i < aantal; i++) {
-            ImageView imageView = new ImageView();
-            imageView.setFitWidth(87);
-            imageView.setFitHeight(123);
-            imageView.setLayoutX(startX + i * tussenruimte);
-            imageView.setLayoutY(startY);
-            imageView.setVisible(false);
-            imageViews.add(imageView);
-            roofView.getChildren().add(imageView);
-        }
-        return imageViews;
-    }
-
-
 }

@@ -1,10 +1,13 @@
 taak\grotetaakcasi\Kaart.class
+taak\grotetaakcasi\BedragenView.class
 taak\grotetaakcasi\BlackJackView.class
 taak\grotetaakcasi\App1.class
+taak\grotetaakcasi\BlackjackController$1.class
 taak\grotetaakcasi\SpelerEnDealer.class
 taak\grotetaakcasi\Bedragen.class
 taak\grotetaakcasi\BlackjackController.class
 taak\grotetaakcasi\SpeelbordController.class
+taak\grotetaakcasi\KaartView.class
 taak\grotetaakcasi\App.class
 module-info.class
 taak\grotetaakcasi\Verplaatsen.class

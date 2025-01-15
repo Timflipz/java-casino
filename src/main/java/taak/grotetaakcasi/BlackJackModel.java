@@ -51,8 +51,7 @@ public class BlackJackModel {
         String uitslag = ""; 
         
         if (spelerScore > 21) {
-            
-        uitslag = "De dealer wint";
+            uitslag = "De dealer wint";
         }else if (dealerScore > 21 || spelerScore > dealerScore) {
             App.getBedragen().voegBedragToe(inzet * 2); 
             uitslag = "Je wint!";
@@ -91,11 +90,17 @@ public class BlackJackModel {
         return App.getBedragen().getTotaleBedrag(); 
     }
 
-    public Image getSpelerKaart(int index) {
+    public Image getSpelerKaartAfbeelding(int index) {
         return speler.getHand().get(index).getAfbeelding();
     }
+    
+    public Kaart getSpelerKaart(int index) {
+        return speler.getHand().get(index);
+    }
+    
+    
 
-    public Image getDealerKaart(int index) {
+    public Image getDealerKaartAfbeelding(int index) {
         return dealer.getHand().get(index).getAfbeelding();
     }
     
