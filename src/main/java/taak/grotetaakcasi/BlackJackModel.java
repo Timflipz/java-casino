@@ -74,6 +74,10 @@ public class BlackJackModel {
         this.inzet = inzet;
         App.getBedragen().geldInnen(inzet);  
     }
+    
+    public double getInzet(){
+        return inzet;
+    }
 
     public boolean isSpelerBoven21() {
         return speler.berekenWaardeHand() > 21;

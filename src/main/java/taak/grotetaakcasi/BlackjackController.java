@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -89,8 +90,6 @@ public class BlackjackController implements Initializable {
 
         spelerImageViews = maakImageViewLijst(10, 66, 290, 93);
         dealerImageViews = maakImageViewLijst(10, 66, 122, 93);
-
-       
 
         hitKnop.setDisable(true);
         standKnop.setDisable(true);
@@ -200,7 +199,7 @@ public class BlackjackController implements Initializable {
             dealerImageViews.get(0).setImage(model.getDealerKaart(0));
             hitKnop.setDisable(true);
             standKnop.setDisable(true);
-            volgendSpel();
+            volgendSpelMetTijd();
         }
 
         ImageView nieuweKaart = new ImageView();
@@ -228,14 +227,13 @@ public class BlackjackController implements Initializable {
         uitslagLabel.setText(uitslag);
         budgetBlackJackLabel.setText("Budget: " + model.getBudget());
 
-        volgendSpel();
+        volgendSpelMetTijd();
     }
     
     public void kaartenZichtbaarMaken(){
         for (int i = 0; i < spelerImageViews.size(); i++) {
             if (i < model.getSpelerHandGrootte()) { 
                 spelerImageViews.get(i).setVisible(true);
-
             }
         }
         
@@ -243,7 +241,6 @@ public class BlackjackController implements Initializable {
             if (i < model.getDealerHandGrootte()) { 
                 dealerImageViews.get(i).setVisible(true);
             }
-            
         }
     }
 
@@ -272,37 +269,37 @@ public class BlackjackController implements Initializable {
      
         uitslagLabel.setText("");
     }
+    
+    public void volgendSpel(){
+        model.startGame();
 
-    public void volgendSpel() {
-        Timer timer = new Timer();
-        TimerTask taak = new TimerTask() {
-            public void run() {
-                Platform.runLater(() -> {
-                    
-                    model.startGame();
-                    
-                    dealerImageViews.get(0).setImage(model.getOmgekeerdeKaartAfbeelding());
-                    
-                    for (int i =0;i<5;i++) {
-                        spelerImageViews.get(i).setVisible(false);
-                        dealerImageViews.get(i).setVisible(false);   
-                    }
-                    
-                    uitslagLabel.setText("");     
-                    inzetText.setText("");
-                    inzetLabel.setText("Inzet: ");
-                    
-                    hitKnop.setDisable(true);
-                    standKnop.setDisable(true);
-                    
-                    hitKnop.toFront();
-                    standKnop.toFront();
-                    
-                    
-                });
-            }
-        };
-        timer.schedule(taak, 3000);
+        dealerImageViews.get(0).setImage(model.getOmgekeerdeKaartAfbeelding());
+
+        for (int i = 0; i < spelerImageViews.size(); i++) {
+            spelerImageViews.get(i).setVisible(false);
+        }
+        
+        for (int i = 0; i < dealerImageViews.size(); i++) {
+            dealerImageViews.get(i).setVisible(false);
+        }
+
+        uitslagLabel.setText("");     
+        inzetText.setText("");
+        inzetLabel.setText("Inzet: ");
+
+        hitKnop.setDisable(true);
+        standKnop.setDisable(true);
+        hitKnop.toFront();
+        standKnop.toFront();
+        
+    }
+
+    public void volgendSpelMetTijd() {
+        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+
+        pause.setOnFinished(event -> volgendSpel());
+
+        pause.play();
     }
 
     public ArrayList<ImageView> maakImageViewLijst(int aantal, double startX, double startY, double tussenruimte) {
