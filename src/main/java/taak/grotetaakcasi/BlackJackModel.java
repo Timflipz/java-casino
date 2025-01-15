@@ -49,8 +49,11 @@ public class BlackJackModel {
         int spelerScore = speler.berekenWaardeHand();
         int dealerScore = dealer.berekenWaardeHand();
         String uitslag = ""; 
-
-        if (dealerScore > 21 || spelerScore > dealerScore) {
+        
+        if (spelerScore > 21) {
+            
+        uitslag = "De dealer wint";
+        }else if (dealerScore > 21 || spelerScore > dealerScore) {
             App.getBedragen().voegBedragToe(inzet * 2); 
             uitslag = "Je wint!";
         } else if (dealerScore == spelerScore) {
