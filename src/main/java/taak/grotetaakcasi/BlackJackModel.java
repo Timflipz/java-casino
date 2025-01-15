@@ -98,8 +98,6 @@ public class BlackJackModel {
         return speler.getHand().get(index);
     }
     
-    
-
     public Image getDealerKaartAfbeelding(int index) {
         return dealer.getHand().get(index).getAfbeelding();
     }

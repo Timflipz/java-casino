@@ -27,9 +27,10 @@ public class BlackjackController implements Initializable {
     private BlackJackView blackjackview;
     private KaartView kaartView;
     private BedragenView bedragenView;
-
+    
     @FXML
-    private Label sout;
+    private Button volgendSpelButton;
+
 
     @FXML
     private Label bjlabel;
@@ -126,6 +127,7 @@ public class BlackjackController implements Initializable {
         model.nieuwPakWanneerLeeg();
         model.spelerTrekKaart();
         kaartView.kaartenToevoegenAanAfbeeldingenlijst();
+        kaartView.toonNieuweSpelerKaart(model.getSpelerHandGrootte());
         
         if (model.isSpelerBoven21()) {
             double inzet = Double.parseDouble(inzetText.getText());
@@ -135,9 +137,7 @@ public class BlackjackController implements Initializable {
             hitKnop.setDisable(true);
             standKnop.setDisable(true);
             volgendSpelMetTijd();
-        }
-        
-        kaartView.toonNieuweKaart(model.getSpelerHandGrootte()); 
+        } 
 
     }
 
@@ -147,10 +147,9 @@ public class BlackjackController implements Initializable {
 
         model.dealerSpelen();
         kaartView.kaartenToevoegenAanAfbeeldingenlijst();
-        kaartView.kaartenZichtbaarMaken(model.getSpelerHandGrootte(),
-                                            model.getDealerHandGrootte(),
-                                            spelerImageViews,
-                                            dealerImageViews);
+        kaartView.dealerKaartenZichtbaarMaken(model.getDealerHandGrootte(),
+                                              spelerImageViews,
+                                              dealerImageViews);
 
         double inzet = Double.parseDouble(inzetText.getText());
         String uitslag = model.bepaalUitslag(inzet);
@@ -180,7 +179,17 @@ public class BlackjackController implements Initializable {
             @Override
             public void run() {
                 Platform.runLater(() -> {
-                    volgendSpel();
+                    model.startGame();
+                    kaartView.resetSpel();
+
+                    uitslagLabel.setText("");     
+                    inzetText.setText("");
+                    bedragenView.resetInzetLabel();
+
+                    hitKnop.setDisable(true);
+                    standKnop.setDisable(true);
+                    hitKnop.toFront();
+                    standKnop.toFront();
                     timer.cancel();
                 });
             }

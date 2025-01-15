@@ -40,6 +40,19 @@ public class KaartView {
             }
         }
     }
+    
+        public void dealerKaartenZichtbaarMaken(int dealerhandgrootte,
+                                      ArrayList<ImageView> spelerImageViews,
+                                      ArrayList<ImageView> dealerImageViews){
+        
+        for (int i = 0; i < dealerImageViews.size(); i++) {
+            if (i < dealerhandgrootte) { 
+                dealerImageViews.get(i).setVisible(true);
+            }
+        }
+    }
+    
+    
 
     public void kaartBeweging(ImageView kaart, double eindX, double eindY, double duurInSeconden) {
         kaart.setLayoutX(500);  
@@ -101,7 +114,7 @@ public class KaartView {
         kaartBeweging(dealerKaart, eindX2, eindY2, 0.5);
     }
 
-    public void toonNieuweKaart(int handGrootte) {
+    public void toonNieuweSpelerKaart(int handGrootte) {
         
         ImageView nieuweKaart = new ImageView();
         nieuweKaart.setImage(model.getSpelerKaartAfbeelding(handGrootte - 1));

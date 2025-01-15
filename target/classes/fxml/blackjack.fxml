@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -22,7 +21,7 @@
          </font></Button>
       <Button fx:id="hitKnop" layoutX="66.0" layoutY="452.0" mnemonicParsing="false" onAction="#hitten" prefHeight="25.0" prefWidth="58.0" text="Hit" />
       <Button fx:id="standKnop" layoutX="138.0" layoutY="452.0" mnemonicParsing="false" onAction="#standen" prefHeight="25.0" prefWidth="58.0" text="Stand" />
-      <Button fx:id="zetInKnop" layoutX="436.0" layoutY="452.0" mnemonicParsing="false" onAction="#inzetten" prefHeight="25.0" prefWidth="109.0" text="Zet in">
+      <Button fx:id="zetInKnop" layoutX="436.0" layoutY="490.0" mnemonicParsing="false" onAction="#inzetten" prefHeight="25.0" prefWidth="109.0" text="Zet in">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -40,9 +39,9 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="inzetText" layoutX="436.0" layoutY="421.0" prefHeight="25.0" prefWidth="109.0" promptText="inzet" />
+      <TextField fx:id="inzetText" layoutX="436.0" layoutY="452.0" prefHeight="25.0" prefWidth="109.0" promptText="inzet" />
+      <Button fx:id="volgendSpelButton" layoutX="66.0" layoutY="490.0" mnemonicParsing="false" onAction="#volgendSpel" prefHeight="25.0" prefWidth="129.0" text="Volgend spel" />
       
-      <Label fx:id="sout" layoutX="66.0" layoutY="482.0" prefHeight="17.0" prefWidth="479.0" />
       
    </children>
    <cursor>
