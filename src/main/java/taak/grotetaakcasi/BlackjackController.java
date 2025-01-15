@@ -26,6 +26,7 @@ public class BlackjackController implements Initializable {
     private BlackJackModel model;
     private BlackJackView blackjackview;
     private KaartView kaartView;
+    private BedragenView bedragenView;
 
     @FXML
     private Label sout;
@@ -34,16 +35,10 @@ public class BlackjackController implements Initializable {
     private Label bjlabel;
 
     @FXML
-    private Label budgetBlackJackLabel;
-
-    @FXML
     private Label dealerKaartenLabel;
 
     @FXML
     private Button hitKnop;
-
-    @FXML
-    private Label inzetLabel;
 
     @FXML
     private TextField inzetText;
@@ -69,11 +64,11 @@ public class BlackjackController implements Initializable {
     private ArrayList<ImageView> spelerImageViews;
     private ArrayList<ImageView> dealerImageViews;
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model = new BlackJackModel();
         blackjackview = new BlackJackView(roofView);
+        bedragenView = new BedragenView(roofView);
 
         blackjackview.maakTafel();
         blackjackview.voegPakKaartenToe();
@@ -93,7 +88,8 @@ public class BlackjackController implements Initializable {
         dealerKaartenLabel.setVisible(true);
         spelersKaartenLabel.setVisible(true);
         
-        budgetBlackJackLabel.setText("Budget: " + model.getBudget());
+        bedragenView.getBudgetLabel().setText("Budget: " + model.getBudget());
+        
 
         model.startGame();
         kaartView.kaartenToevoegenAanAfbeeldingenlijst();
@@ -110,8 +106,8 @@ public class BlackjackController implements Initializable {
         if (model.isInzetGeldig(inzet)) {
             model.setInzet(inzet);
             
-            inzetLabel.setText("Inzet: " + inzet);
-            budgetBlackJackLabel.setText("Budget: " + model.getBudget());
+            bedragenView.updateInzetLabel( inzet);
+            bedragenView.getBudgetLabel().setText("Budget: " + model.getBudget());
             
             hitKnop.setDisable(false);
             standKnop.setDisable(false);
@@ -159,7 +155,7 @@ public class BlackjackController implements Initializable {
         double inzet = Double.parseDouble(inzetText.getText());
         String uitslag = model.bepaalUitslag(inzet);
         uitslagLabel.setText(uitslag);
-        budgetBlackJackLabel.setText("Budget: " + model.getBudget());
+        bedragenView.getBudgetLabel().setText("Budget: " + model.getBudget());
 
         volgendSpelMetTijd();
     }
@@ -170,7 +166,7 @@ public class BlackjackController implements Initializable {
 
         uitslagLabel.setText("");     
         inzetText.setText("");
-        inzetLabel.setText("Inzet: ");
+        bedragenView.resetInzetLabel();
 
         hitKnop.setDisable(true);
         standKnop.setDisable(true);
