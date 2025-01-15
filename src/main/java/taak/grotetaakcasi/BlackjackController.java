@@ -2,6 +2,7 @@ package taak.grotetaakcasi;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -62,8 +63,9 @@ public class BlackjackController implements Initializable {
     @FXML
     private Button zetInKnop;
 
-    private ImageView[] spelerImageViews;
-    private ImageView[] dealerImageViews;
+    private ArrayList<ImageView> spelerImageViews;
+    private ArrayList<ImageView> dealerImageViews;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -85,18 +87,10 @@ public class BlackjackController implements Initializable {
             roofView.getChildren().add(stapelAfbeelding);
         }
 
-        spelerImageViews = imageViewLijst(10, 66, 290, 93);
-        dealerImageViews = imageViewLijst(10, 66, 122, 93);
+        spelerImageViews = maakImageViewLijst(10, 66, 290, 93);
+        dealerImageViews = maakImageViewLijst(10, 66, 122, 93);
 
-        for (ImageView imageView : spelerImageViews) {
-            imageView.setVisible(false);
-            roofView.getChildren().add(imageView);
-        }
-
-        for (ImageView imageView : dealerImageViews) {
-            imageView.setVisible(false);
-            roofView.getChildren().add(imageView);
-        }
+       
 
         hitKnop.setDisable(true);
         standKnop.setDisable(true);
@@ -108,9 +102,9 @@ public class BlackjackController implements Initializable {
         spelersKaartenLabel.setVisible(true);
 
         model.startGame();
-        updateUI();
+        kaartenToevoegen();
 
-        dealerImageViews[0].setImage(model.getOmgekeerdeKaartAfbeelding());
+        dealerImageViews.get(0).setImage(model.getOmgekeerdeKaartAfbeelding());
         
         
     }
@@ -120,7 +114,7 @@ public class BlackjackController implements Initializable {
         App.setRoot("menu");
     }
     
-    private void beweegKaartNaarPositie(ImageView kaart,double eindX, double eindY, double duurInSeconden) {
+    public void kaartBeweging(ImageView kaart,double eindX, double eindY, double duurInSeconden) {
         kaart.setLayoutX(500);
         kaart.setLayoutY(122);
         kaart.setFitWidth(87);  
@@ -138,7 +132,7 @@ public class BlackjackController implements Initializable {
             kaart.setLayoutX(eindX);
             kaart.setLayoutY(eindY);
             roofView.getChildren().remove(kaart);
-            zichtbaarMaken();
+            kaartenZichtbaarMaken();
         });
 
         animatie.play();
@@ -155,7 +149,7 @@ public class BlackjackController implements Initializable {
             budgetBlackJackLabel.setText("Budget: " + model.getBudget());
             hitKnop.setDisable(false);
             standKnop.setDisable(false);
-            dealerImageViews[0].setVisible(true);
+            dealerImageViews.get(0).setVisible(true);
 
             for (int i = 0; i < 2; i++) {
                 ImageView kaart = new ImageView();
@@ -165,7 +159,7 @@ public class BlackjackController implements Initializable {
                 double eindX = 66 + i * 93;
                 double eindY = 290; 
 
-                beweegKaartNaarPositie(kaart, eindX, eindY, 0.5);
+                kaartBeweging(kaart, eindX, eindY, 0.5);
             }
 
             ImageView Omgekeerdekaart = new ImageView();
@@ -175,7 +169,7 @@ public class BlackjackController implements Initializable {
             Omgekeerdekaart.setFitHeight(123);
             double eindX = 66;  
             double eindY = 122; 
-            beweegKaartNaarPositie(Omgekeerdekaart, eindX, eindY, 0.5);
+            kaartBeweging(Omgekeerdekaart, eindX, eindY, 0.5);
 
             ImageView kaart = new ImageView();
             kaart.setImage(model.getDealerKaart(1));
@@ -184,9 +178,9 @@ public class BlackjackController implements Initializable {
             kaart.setFitHeight(123);
             double eindX2 = 66 + 93;  
             double eindY2 = 122; 
-            beweegKaartNaarPositie(kaart, eindX2, eindY2, 0.5);
+            kaartBeweging(kaart, eindX2, eindY2, 0.5);
             
-            updateUI();
+            kaartenToevoegen();
 
         } else {
             App.setRoot("Tafel");
@@ -197,13 +191,13 @@ public class BlackjackController implements Initializable {
     public void hitten(ActionEvent event) {
         model.nieuwPakWanneerLeeg();
         model.spelerTrekKaart();
-        updateUI();
+        kaartenToevoegen();
         
         if (model.isSpelerBoven21()) {
             double inzet = Double.parseDouble(inzetText.getText());
             String uitslag = model.bepaalUitslag(inzet);
             uitslagLabel.setText(uitslag);
-            dealerImageViews[0].setImage(model.getDealerKaart(0));
+            dealerImageViews.get(0).setImage(model.getDealerKaart(0));
             hitKnop.setDisable(true);
             standKnop.setDisable(true);
             volgendSpel();
@@ -217,17 +211,17 @@ public class BlackjackController implements Initializable {
         double eindX = 66 + (model.getSpelerHandGrootte() - 1) * 93;
         double eindY = 290; 
 
-        beweegKaartNaarPositie(nieuweKaart,eindX, eindY, 0.5); 
+        kaartBeweging(nieuweKaart,eindX, eindY, 0.5); 
 
     }
 
     @FXML
     public void standen(ActionEvent event) {
-        dealerImageViews[0].setImage(model.getDealerKaart(0));
+        dealerImageViews.get(0).setImage(model.getDealerKaart(0));
 
         model.dealerSpelen();
-        updateUI();
-        zichtbaarMaken();
+        kaartenToevoegen();
+        kaartenZichtbaarMaken();
 
         double inzet = Double.parseDouble(inzetText.getText());
         String uitslag = model.bepaalUitslag(inzet);
@@ -237,40 +231,40 @@ public class BlackjackController implements Initializable {
         volgendSpel();
     }
     
-    public void zichtbaarMaken(){
-        for (int i = 0; i < spelerImageViews.length; i++) {
+    public void kaartenZichtbaarMaken(){
+        for (int i = 0; i < spelerImageViews.size(); i++) {
             if (i < model.getSpelerHandGrootte()) { 
-                spelerImageViews[i].setVisible(true);
+                spelerImageViews.get(i).setVisible(true);
 
             }
         }
         
-        for (int i = 0; i < dealerImageViews.length; i++) {
+        for (int i = 0; i < dealerImageViews.size(); i++) {
             if (i < model.getDealerHandGrootte()) { 
-                dealerImageViews[i].setVisible(true);
+                dealerImageViews.get(i).setVisible(true);
             }
             
         }
     }
 
 
-    private void updateUI() {
+    public void kaartenToevoegen() {
         
-        for (int i = 0; i < spelerImageViews.length; i++) {
+        for (int i = 0; i < spelerImageViews.size(); i++) {
             if (i < model.getSpelerHandGrootte()) {
-                if (!spelerImageViews[i].isVisible()){   
-                    spelerImageViews[i].setImage(model.getSpelerKaart(i));
-                    spelerImageViews[i].setVisible(false);
+                if (!spelerImageViews.get(i).isVisible()){   
+                    spelerImageViews.get(i).setImage(model.getSpelerKaart(i));
+                    spelerImageViews.get(i).setVisible(false);
                 } 
             }
         }
         
-        for (int i = 1; i < dealerImageViews.length; i++) {
+        for (int i = 1; i < dealerImageViews.size(); i++) {
             if (i < model.getDealerHandGrootte()) {
-                if (!dealerImageViews[i].isVisible()){
-                    dealerImageViews[0].setVisible(false);
-                    dealerImageViews[i].setImage(model.getDealerKaart(i));
-                     dealerImageViews[i].setVisible(false);
+                if (!dealerImageViews.get(i).isVisible()){
+                    dealerImageViews.get(0).setVisible(false);
+                    dealerImageViews.get(i).setImage(model.getDealerKaart(i));
+                     dealerImageViews.get(i).setVisible(false);
                 }
             }
         }
@@ -279,7 +273,7 @@ public class BlackjackController implements Initializable {
         uitslagLabel.setText("");
     }
 
-    private void volgendSpel() {
+    public void volgendSpel() {
         Timer timer = new Timer();
         TimerTask taak = new TimerTask() {
             public void run() {
@@ -287,11 +281,11 @@ public class BlackjackController implements Initializable {
                     
                     model.startGame();
                     
-                    dealerImageViews[0].setImage(model.getOmgekeerdeKaartAfbeelding());
+                    dealerImageViews.get(0).setImage(model.getOmgekeerdeKaartAfbeelding());
                     
                     for (int i =0;i<5;i++) {
-                        spelerImageViews[i].setVisible(false);
-                        dealerImageViews[i].setVisible(false);   
+                        spelerImageViews.get(i).setVisible(false);
+                        dealerImageViews.get(i).setVisible(false);   
                     }
                     
                     uitslagLabel.setText("");     
@@ -311,8 +305,8 @@ public class BlackjackController implements Initializable {
         timer.schedule(taak, 3000);
     }
 
-    private ImageView[] imageViewLijst(int aantal, double startX, double startY, double tussenruimte) {
-        ImageView[] imageViews = new ImageView[aantal];
+    public ArrayList<ImageView> maakImageViewLijst(int aantal, double startX, double startY, double tussenruimte) {
+        ArrayList<ImageView> imageViews = new ArrayList<>();
         for (int i = 0; i < aantal; i++) {
             ImageView imageView = new ImageView();
             imageView.setFitWidth(87);
@@ -320,8 +314,11 @@ public class BlackjackController implements Initializable {
             imageView.setLayoutX(startX + i * tussenruimte);
             imageView.setLayoutY(startY);
             imageView.setVisible(false);
-            imageViews[i] = imageView;
+            imageViews.add(imageView);
+            roofView.getChildren().add(imageView);
         }
         return imageViews;
     }
+
+
 }
