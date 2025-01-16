@@ -19,7 +19,7 @@ public class BlackJackView {
     }
     
     public void maakTafel(){
-        Rectangle tafel = new Rectangle(0, 90, 640, 590);
+        Rectangle tafel = new Rectangle(0, 80, 640, 590);
         tafel.setFill(Color.GREEN);
         roofView.getChildren().add(tafel);
         tafel.toBack();
