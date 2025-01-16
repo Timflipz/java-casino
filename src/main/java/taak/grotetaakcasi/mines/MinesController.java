@@ -110,8 +110,11 @@ public void handleButtonClick(ActionEvent event) {
         for (Button button : buttons) {
             button.setDisable(true);
         }
+        
 
         showGameOverMessage();
+        
+        resetGame();
     } else {
        
         Image diamondImage = new Image(getClass().getResourceAsStream("/afbeeldingen/diamant.png"));
