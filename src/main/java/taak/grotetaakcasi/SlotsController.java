@@ -101,8 +101,8 @@ public class SlotsController {
        
         Timeline flikkerTimeline = new Timeline();
         flikkerTimeline.setCycleCount(30);
-
-        KeyFrame flikkerFrame = new KeyFrame(
+        //Bron is chatgpt
+        KeyFrame flikkerFrame = new KeyFrame( 
             Duration.millis(100),
             e -> {
                 int randomNumber1 = random.nextInt(symbols.length);
@@ -131,13 +131,13 @@ public class SlotsController {
 
        
         flikkerTimeline.setOnFinished(e -> {
-            int finalNumber1 = random.nextInt(symbols.length);
-            int finalNumber2 = random.nextInt(symbols.length);
-            int finalNumber3 = random.nextInt(symbols.length);
+            int eindnummer1 = random.nextInt(symbols.length);
+            int eindnummer2 = random.nextInt(symbols.length);
+            int eindnummer3 = random.nextInt(symbols.length);
 
-            Image image1 = new Image(getClass().getResource("/afbeeldingen/" + symbols[finalNumber1]).toExternalForm());
-            Image image2 = new Image(getClass().getResource("/afbeeldingen/" + symbols[finalNumber2]).toExternalForm());
-            Image image3 = new Image(getClass().getResource("/afbeeldingen/" + symbols[finalNumber3]).toExternalForm());
+            Image image1 = new Image(getClass().getResource("/afbeeldingen/" + symbols[eindnummer1]).toExternalForm());
+            Image image2 = new Image(getClass().getResource("/afbeeldingen/" + symbols[eindnummer2]).toExternalForm());
+            Image image3 = new Image(getClass().getResource("/afbeeldingen/" + symbols[eindnummer3]).toExternalForm());
 
             
             imageView1.setImage(image1);
@@ -159,9 +159,9 @@ public class SlotsController {
 
             
             int winst = 0;
-            if (finalNumber1 == finalNumber2 && finalNumber2 == finalNumber3) {
+            if (eindnummer1 == eindnummer2 && eindnummer2 == eindnummer3) {
                 winst = inzet * 2; 
-            } else if (finalNumber1 == finalNumber2 || finalNumber2 == finalNumber3 || finalNumber1 == finalNumber3) {
+            } else if (eindnummer1 == eindnummer2 || eindnummer2 == eindnummer3 || eindnummer1 == eindnummer3) {
                 winst = (int) Math.round(inzet * 1.5); 
             } else {
                 winst = -inzet; 

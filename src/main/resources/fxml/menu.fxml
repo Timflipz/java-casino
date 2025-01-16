@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taak.grotetaakcasi.SpeelbordController">
    <children>
-      <Label fx:id="algemeenBudgetLabel" layoutX="14" layoutY="14" prefHeight="27.0" prefWidth="190.0" text="Budget: ">
+      <Label fx:id="algemeenBudgetLabel" layoutX="29.0" layoutY="26.0" prefHeight="27.0" prefWidth="190.0" text="Budget: ">
          <font>
             <Font size="18.0" />
          </font>
@@ -20,15 +20,14 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
-
-      <Button fx:id="hogerLagerButton" layoutX="29" layoutY="98.0" mnemonicParsing="false" onAction="#hogerLagerOpenen" prefHeight="102.0" prefWidth="261.0" text="Hoger Lager" textFill="#db00ff">
+      <Button fx:id="hogerLagerButton" layoutX="141.0" layoutY="68.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="352.0" text="Hoger Lager" textFill="#db00ff">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="48.0" />
          </font>
       </Button>
-      <Button fx:id="blackJackButton" layoutX="324.0" layoutY="98.0" mnemonicParsing="false" onAction="#blackJackOpenen" prefHeight="102.0" prefWidth="261.0" text="Black Jack">
+      <Button fx:id="blackJackButton" layoutX="140.0" layoutY="178.0" mnemonicParsing="false" onAction="#blackJackOpenen" prefHeight="102.0" prefWidth="352.0" text="Black Jack">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="48.0" />
          </font>
       </Button>
       <Label fx:id="menuLabel" layoutX="238.0" layoutY="5.0" text="MENU">
@@ -37,14 +36,9 @@
          </font>
       </Label>
       <Button fx:id="geldActies" layoutX="437.0" layoutY="27.0" mnemonicParsing="false" onAction="#update" text="Geld innen/toevoegen" />
-      <Button layoutX="29.0" layoutY="236.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="261.0" text="Slots">
+      <Button fx:id="slotsButton" layoutX="140.0" layoutY="291.0" mnemonicParsing="false" onAction="#slotsOpenen" prefHeight="102.0" prefWidth="352.0" text="Slots">
          <font>
-            <Font size="36.0" />
-         </font>
-      </Button>
-      <Button fx:id="mines" layoutX="324.0" layoutY="236.0" mnemonicParsing="false" onAction="#openMines" prefHeight="102.0" prefWidth="261.0" text="Mines" textFill="#1ddb7c">
-         <font>
-            <Font size="36.0" />
+            <Font size="48.0" />
          </font>
       </Button>
    </children>
