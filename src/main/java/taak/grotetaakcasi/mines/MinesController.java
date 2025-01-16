@@ -29,13 +29,13 @@ public class MinesController {
             button21, button22, button23, button24, button25;
 
     @FXML private TextField inzetField;
-    @FXML private Label geldLabel;   // Voor huidig spelgeld
-    @FXML private Label budgetLabel; // Voor totaalbudget
+    @FXML private Label geldLabel;  
+    @FXML private Label budgetLabel; 
     @FXML private Button terugNaarMenuButton;
     @FXML private Button innenButton;
-    @FXML private Button restartButton;  // Herstartknop
+    @FXML private Button restartButton;  
 
-    private double geld = 0.0;  // Start met 0, in plaats van 100
+    private double geld = 0.0;  
     private double inzet = 0.0;
     private double gewonnenGeld = 0.0;
     private final double vermenigvuldigingsFactor = 1.25;
@@ -67,7 +67,7 @@ public class MinesController {
             button.setDisable(false);
             button.setOpacity(1);
         }
-        // Zet de herstartknop weer zichtbaar als het spel wordt gereset
+        
         restartButton.setVisible(true);
     }
 
@@ -79,7 +79,7 @@ public class MinesController {
                 inzet = nieuweInzet;
                 App.getBedragen().geldInnen(inzet);
                 updateBudgetLabel();
-                geld = inzet;  // Het geld wordt nu gelijk aan de inzet
+                geld = inzet;  
                 geldLabel.setText("Geld: €" + String.format("%.2f", geld));
             } else {
                 inzetField.setText("Onvoldoende budget!");
@@ -95,45 +95,40 @@ public void handleButtonClick(ActionEvent event) {
     Button clickedButton = (Button) event.getSource();
     int index = buttons.indexOf(clickedButton);
 
-    // Controleer of het op een bom is
+   
     if (isBomb.get(index)) {
-        // Toon de afbeelding van de bom
+   
         Image bombImage = new Image(getClass().getResourceAsStream("/afbeeldingen/bom.png"));
         ImageView imageView = new ImageView(bombImage);
         setImageViewSize(imageView, clickedButton);
         clickedButton.setGraphic(imageView);
-        clickedButton.setDisable(true);  // Deactiveer de knop waarop de bom zit
-        
-        // Zet de inzet op 0 omdat het spel voorbij is
+        clickedButton.setDisable(true);  
+       
         geld = 0.0;
         geldLabel.setText("Geld: €" + String.format("%.2f", geld));
-
-        // Deactiveer alle andere knoppen, spel is voorbij
+       
         for (Button button : buttons) {
             button.setDisable(true);
         }
 
-        // Optioneel: Toon een bericht dat het spel is afgelopen
         showGameOverMessage();
     } else {
-        // Als er geen bom is, toon een diamant en verhoog de inzet
+       
         Image diamondImage = new Image(getClass().getResourceAsStream("/afbeeldingen/diamant.png"));
         ImageView imageView = new ImageView(diamondImage);
         setImageViewSize(imageView, clickedButton);
         clickedButton.setGraphic(imageView);
-        clickedButton.setDisable(true);  // Deactiveer de geklikte knop
+        clickedButton.setDisable(true);  
 
-         // Bereken de winst (zonder de originele inzet)
-        double winst = inzet * (vermenigvuldigingsFactor - 1);  // De winst is de extra opbrengst
-        gewonnenGeld += winst;  // Voeg de winst toe aan gewonnenGeld (i.p.v. geld)
-        inzet *= vermenigvuldigingsFactor;  // Verhoog de inzet voor de volgende ronde
-        geldLabel.setText("Geld: €" + String.format("%.2f", geld + gewonnenGeld));  // Laat de totale winst zien
+        double winst = inzet * (vermenigvuldigingsFactor - 1); 
+        gewonnenGeld += winst;  
+        inzet *= vermenigvuldigingsFactor;  
+        geldLabel.setText("Geld: €" + String.format("%.2f", geld + gewonnenGeld));  
     }
 }
 
 
     private void showGameOverMessage() {
-        // Toon een simpele pop-up of boodschap voor het einde van het spel
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Over");
         alert.setHeaderText("Je hebt een bom gevonden!");
@@ -143,12 +138,12 @@ public void handleButtonClick(ActionEvent event) {
 
     @FXML
     public void handleInnenButtonClick() {
-    double totaalBedrag = geld + gewonnenGeld;  // Het totaalbedrag is het geld dat je had + de winst
-    App.getBedragen().voegBedragToe(totaalBedrag);  // Voeg het totaalbedrag toe aan het totaalbudget
-    gewonnenGeld = 0.0;  // Reset de gewonnenGeld na het innen
-    resetGame();  // Reset het spel
-    updateBudgetLabel();  // Werk het budgetlabel bij
-    geldLabel.setText("Geld: €0.00");  // Zet het huidige geld naar 0
+    double totaalBedrag = geld + gewonnenGeld; 
+    App.getBedragen().voegBedragToe(totaalBedrag);  
+    gewonnenGeld = 0.0;  
+    resetGame();  
+    updateBudgetLabel();  
+    geldLabel.setText("Geld: €0.00");  
 }
 
     private void updateBudgetLabel() {
@@ -165,28 +160,24 @@ public void handleButtonClick(ActionEvent event) {
     }
 
     private void setImageViewSize(ImageView imageView, Button button) {
-        // Stel de grootte van de afbeelding in op basis van de grootte van de knop
+        
         double width = button.getWidth();
         double height = button.getHeight();
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
-        imageView.setPreserveRatio(true);  // Zorg ervoor dat de verhoudingen behouden blijven
+        imageView.setPreserveRatio(true);  
     }
 
     @FXML
     public void restartGame() {
-        // Zet het bord terug naar de beginstaat
+       
         resetGame();
 
-        // Zet het geld terug naar 0
         geld = 0.0;
         geldLabel.setText("Geld: €" + String.format("%.2f", geld));
         
-        // Zet de inzet terug naar 0
         inzet = 0.0;
         inzetField.clear();
 
-       
-      
     }
 }
