@@ -40,4 +40,8 @@ public class SpeelbordController {
     private void update(ActionEvent event) throws IOException {
         App.setRoot("Tafel");
     }
+    @FXML
+     public void slotsOpenen() throws IOException{
+        App.setRoot("slots"); 
+     }    
 }
