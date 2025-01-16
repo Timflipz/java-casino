@@ -1,6 +1,9 @@
 package taak.grotetaakcasi;
 
 import javafx.scene.image.Image;
+import taak.grotetaakcasi.App;
+import taak.grotetaakcasi.PakKaarten;
+import taak.grotetaakcasi.SpelerEnDealer;
 
 public class BlackJackModel {
     private SpelerEnDealer speler;
@@ -13,8 +16,15 @@ public class BlackJackModel {
         dealer = new SpelerEnDealer();
         pakKaarten = new PakKaarten();
     }
+    
+    public void nieuwPakWanneerLeeg(){
+        if (pakKaarten.getAantalKaarten()<4){
+            this.pakKaarten = new PakKaarten();
+        }
+    }
 
     public void startGame() {
+        nieuwPakWanneerLeeg();
         pakKaarten.kaartenSchudden();
         speler.resetHand();
         dealer.resetHand();
@@ -29,24 +39,30 @@ public class BlackJackModel {
     }
 
     public void dealerSpelen() {
+        
         while (dealer.berekenWaardeHand() < 17) {
             dealer.voegKaartToe(pakKaarten.trekKaart());
         }
     }
 
-    public String bepaalUitslag() {
+    public String bepaalUitslag(double inzet) {
         int spelerScore = speler.berekenWaardeHand();
         int dealerScore = dealer.berekenWaardeHand();
-
-        if (dealerScore > 21 || spelerScore > dealerScore) {
+        String uitslag = ""; 
+        
+        if (spelerScore > 21) {
+            uitslag = "De dealer wint";
+        }else if (dealerScore > 21 || spelerScore > dealerScore) {
             App.getBedragen().voegBedragToe(inzet * 2); 
-            return "Je wint!";
-        } else if (dealerScore > spelerScore) {
-            return "De dealer wint.";
-        } else {
+            uitslag = "Je wint!";
+        } else if (dealerScore == spelerScore) {
             App.getBedragen().voegBedragToe(inzet);  
-            return "Het is een gelijkspel.";
+            uitslag = "Het is een gelijkspel.";
+        }else{
+            uitslag = "De dealer wint";
         }
+
+        return uitslag; 
     }
 
     public boolean isInzetGeldig(double inzet) {
@@ -57,12 +73,16 @@ public class BlackJackModel {
         this.inzet = inzet;
         App.getBedragen().geldInnen(inzet);  
     }
+    
+    public double getInzet(){
+        return inzet;
+    }
 
     public boolean isSpelerBoven21() {
         return speler.berekenWaardeHand() > 21;
     }
 
-    public void resetGame() {
+    public void reset() {
         startGame();
     }
 
@@ -70,11 +90,29 @@ public class BlackJackModel {
         return App.getBedragen().getTotaleBedrag(); 
     }
 
-    public Image getSpelerKaart(int index) {
+    public Image getSpelerKaartAfbeelding(int index) {
         return speler.getHand().get(index).getAfbeelding();
     }
-
-    public Image getDealerKaart(int index) {
+    
+    public Kaart getSpelerKaart(int index) {
+        return speler.getHand().get(index);
+    }
+    
+    public Image getDealerKaartAfbeelding(int index) {
         return dealer.getHand().get(index).getAfbeelding();
     }
+    
+    public Image getOmgekeerdeKaartAfbeelding() {
+        String afb = "/afbeeldingen/OmgekeerdeKaart.png";
+        return new Image(getClass().getResourceAsStream(afb));
+    }
+    
+    public int getSpelerHandGrootte() {
+    return speler.getHand().size();
+}
+
+    public int getDealerHandGrootte() {
+        return dealer.getHand().size();
+    }
+
 }
