@@ -173,6 +173,7 @@ public class BlackjackController implements Initializable {
         standKnop.setDisable(true);
         hitKnop.toFront();
         standKnop.toFront();
+        zetInKnop.setDisable(false);
     }
 
     public void volgendSpelMetTijd() {
@@ -181,18 +182,7 @@ public class BlackjackController implements Initializable {
             @Override
             public void run() {
                 Platform.runLater(() -> {
-                    model.startGame();
-                    kaartView.resetSpel();
-                    
-                    zetInKnop.setDisable(false);
-                    uitslagLabel.setText("");     
-                    inzetText.setText("");
-                    bedragenView.resetInzetLabel();
-
-                    hitKnop.setDisable(true);
-                    standKnop.setDisable(true);
-                    hitKnop.toFront();
-                    standKnop.toFront();
+                    volgendSpel();
                     timer.cancel();
                 });
             }

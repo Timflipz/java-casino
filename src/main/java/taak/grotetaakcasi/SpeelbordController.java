@@ -23,9 +23,11 @@ public class SpeelbordController {
     @FXML
     private Button hogerLagerButton;
     
+
     @FXML
     private Button mines;
     
+
     @FXML
     private Label menuLabel;
     @FXML
@@ -43,8 +45,13 @@ public class SpeelbordController {
     }
     
     public void hogerLagerOpenen() throws IOException{
-        App.setRoot("hogerlager"); 
+
+        App.setRoot("HogerLagerMenu"); 
+
+        App.setRoot("hogerLagerMenu"); 
+
     } 
+
     public void openMines() throws IOException{
         App.setRoot("mines");
     }
@@ -57,4 +64,15 @@ public class SpeelbordController {
         anchorPane.getChildren().add(tafel);
         tafel.toBack();
     }
+
+
+    @FXML
+    private void update(ActionEvent event) throws IOException {
+        App.setRoot("Tafel");
+    }
+    @FXML
+     public void slotsOpenen() throws IOException{
+        App.setRoot("slots"); 
+     }    
+
 }
