@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.scene.layout.AnchorPane;
 
-public class KaartView {
+public class KaartView { 
 
     private AnchorPane roofView;
     private BlackJackView blackjackview;
