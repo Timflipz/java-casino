@@ -17,6 +17,9 @@ public class SpeelbordController {
     @FXML
     private Button hogerLagerButton;
     
+        @FXML
+    private Button mines;
+    
     @FXML
     private Label menuLabel;
     @FXML
@@ -39,5 +42,9 @@ public class SpeelbordController {
     @FXML
     private void update(ActionEvent event) throws IOException {
         App.setRoot("Tafel");
+    }
+    @FXML
+    public void openMines() throws IOException{
+        App.setRoot("mines");
     }
 }
