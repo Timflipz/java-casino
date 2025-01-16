@@ -38,7 +38,7 @@ public class MinesController {
     private double geld = 0.0;  
     private double inzet = 0.0;
     private double gewonnenGeld = 0.0;
-    private final double vermenigvuldigingsFactor = 1.25;
+    private final double vermenigvuldigingsFactor = 1.24;
     private final List<Button> buttons = new ArrayList<>();
     private final List<Boolean> isBomb = new ArrayList<>();
     
