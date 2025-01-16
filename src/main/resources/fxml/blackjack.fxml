@@ -5,20 +5,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="roofView" prefHeight="510.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taak.grotetaakcasi.BlackjackController">
+<AnchorPane id="AnchorPane" fx:id="roofView" prefHeight="530.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taak.grotetaakcasi.BlackjackController">
    <children>
       <Label fx:id="bjlabel" layoutX="159.0" layoutY="-6.0" text="Black Jack" textFill="#0d0d0d">
          <font>
             <Font size="64.0" />
-         </font>
-      </Label>
-      <Label fx:id="budgetBlackJackLabel" layoutX="14.0" layoutY="14.0" text="budget">
-         <font>
-            <Font size="18.0" />
          </font>
       </Label>
       <Button fx:id="menuKnop" layoutX="520.0" layoutY="28.0" mnemonicParsing="false" onAction="#terugNaarMenu" text="MENU">
@@ -27,7 +21,7 @@
          </font></Button>
       <Button fx:id="hitKnop" layoutX="66.0" layoutY="452.0" mnemonicParsing="false" onAction="#hitten" prefHeight="25.0" prefWidth="58.0" text="Hit" />
       <Button fx:id="standKnop" layoutX="138.0" layoutY="452.0" mnemonicParsing="false" onAction="#standen" prefHeight="25.0" prefWidth="58.0" text="Stand" />
-      <Button fx:id="zetInKnop" layoutX="436.0" layoutY="452.0" mnemonicParsing="false" onAction="#inzetten" prefHeight="25.0" prefWidth="109.0" text="Zet in">
+      <Button fx:id="zetInKnop" layoutX="436.0" layoutY="490.0" mnemonicParsing="false" onAction="#inzetten" prefHeight="25.0" prefWidth="109.0" text="Zet in">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -36,7 +30,7 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-      <Label fx:id="dealerKaartenLabel" depthTest="DISABLE" layoutX="54.0" layoutY="87.0" prefHeight="35.0" prefWidth="168.0" text="Kaarten dealer:" textFill="WHITE">
+      <Label fx:id="dealerKaartenLabel" depthTest="DISABLE" layoutX="60.0" layoutY="87.0" prefHeight="35.0" prefWidth="168.0" text="Kaarten dealer:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font></Label>
@@ -45,26 +39,10 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="inzetText" layoutX="436.0" layoutY="421.0" prefHeight="25.0" prefWidth="109.0" promptText="inzet" />
-      <Label fx:id="inzetLabel" layoutX="310.0" layoutY="447.0" prefHeight="25.0" prefWidth="109.0" text="Inzet:" textFill="#abae75">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="afbeeldingSpeler" fitHeight="123.0" fitWidth="87.0" layoutX="66.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingSpeler2" fitHeight="123.0" fitWidth="87.0" layoutX="159.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingSpeler3" fitHeight="123.0" fitWidth="87.0" layoutX="266.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingSpeler4" fitHeight="123.0" fitWidth="87.0" layoutX="365.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingDealer" fitHeight="123.0" fitWidth="87.0" layoutX="66.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingDealer2" fitHeight="123.0" fitWidth="87.0" layoutX="153.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingDealer3" fitHeight="123.0" fitWidth="87.0" layoutX="266.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingDealer4" fitHeight="123.0" fitWidth="87.0" layoutX="350.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingSpeler5" fitHeight="123.0" fitWidth="87.0" layoutX="459.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="afbeeldingDealer5" fitHeight="123.0" fitWidth="87.0" layoutX="459.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="sout" layoutX="66.0" layoutY="482.0" prefHeight="17.0" prefWidth="479.0" />
-      <ImageView fx:id="pakje1" fitHeight="150.0" fitWidth="87.0" layoutX="522.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="pakje2" fitHeight="150.0" fitWidth="87.0" layoutX="503.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="pakje3" fitHeight="150.0" fitWidth="87.0" layoutX="479.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="inzetText" layoutX="436.0" layoutY="452.0" prefHeight="25.0" prefWidth="109.0" promptText="inzet" />
+      <Button fx:id="volgendSpelButton" layoutX="66.0" layoutY="490.0" mnemonicParsing="false" onAction="#volgendSpel" prefHeight="25.0" prefWidth="129.0" text="Volgend spel" />
+      
+      
    </children>
    <cursor>
       <Cursor fx:constant="DEFAULT" />

@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Kaart {
+
     private String symbool;
     private String nummer;
 
@@ -34,6 +35,7 @@ public class Kaart {
         String afb = "/afbeeldingen/" + symbool + "_" + nummer + ".png";
         return new Image(getClass().getResourceAsStream(afb));
     }
+         
     
     public String toString() {
         return symbool + " " + nummer;
