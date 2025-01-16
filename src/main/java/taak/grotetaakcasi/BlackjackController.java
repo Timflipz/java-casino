@@ -71,7 +71,7 @@ public class BlackjackController implements Initializable {
         bedragenView = new BedragenView(roofView);
 
         blackjackview.maakTafel();
-        blackjackview.voegPakKaartenToe();
+        blackjackview.voegPakKaartenToe(500,122);
 
         spelerImageViews = blackjackview.maakImageViewLijst(10, 66, 290, 93);
         dealerImageViews = blackjackview.maakImageViewLijst(10, 66, 122, 93);
@@ -115,6 +115,8 @@ public class BlackjackController implements Initializable {
             kaartView.beginSpelNaInzetten();
             
             kaartView.kaartenToevoegenAanAfbeeldingenlijst();
+            
+            zetInKnop.setDisable(true);
 
         } else {
             App.setRoot("Tafel");
@@ -142,6 +144,7 @@ public class BlackjackController implements Initializable {
 
     @FXML
     public void standen(ActionEvent event) {
+        
         kaartView.dealerKaartNaStandenOnthullen();
 
         model.dealerSpelen();
@@ -170,6 +173,7 @@ public class BlackjackController implements Initializable {
         standKnop.setDisable(true);
         hitKnop.toFront();
         standKnop.toFront();
+        zetInKnop.setDisable(false);
     }
 
     public void volgendSpelMetTijd() {
@@ -178,17 +182,7 @@ public class BlackjackController implements Initializable {
             @Override
             public void run() {
                 Platform.runLater(() -> {
-                    model.startGame();
-                    kaartView.resetSpel();
-
-                    uitslagLabel.setText("");     
-                    inzetText.setText("");
-                    bedragenView.resetInzetLabel();
-
-                    hitKnop.setDisable(true);
-                    standKnop.setDisable(true);
-                    hitKnop.toFront();
-                    standKnop.toFront();
+                    volgendSpel();
                     timer.cancel();
                 });
             }
