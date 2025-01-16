@@ -6,7 +6,7 @@ package taak.grotetaakcasi.mines;
 
 
 
-import java.io.IOException;
+import java.io.IOException; 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +18,9 @@ import javafx.scene.control.Alert;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import taak.grotetaakcasi.App;
 
 public class MinesController {
@@ -31,16 +34,16 @@ public class MinesController {
     @FXML private TextField inzetField;
     @FXML private Label geldLabel;  
     @FXML private Label budgetLabel; 
-    @FXML private Button terugNaarMenuButton;
-    @FXML private Button innenButton;
-    @FXML private Button restartButton;  
-
+    @FXML private AnchorPane anchorPane;
+    
     private double geld = 0.0;  
     private double inzet = 0.0;
     private double gewonnenGeld = 0.0;
-    private final double vermenigvuldigingsFactor = 1.25;
+    private final double vermenigvuldigingsFactor = 1.15;
     private final List<Button> buttons = new ArrayList<>();
     private final List<Boolean> isBomb = new ArrayList<>();
+    
+    private boolean magSpelen = false; // Nieuw veld voor speelstatus
     
     @FXML
     public void gaNaarMenu(ActionEvent event) throws IOException {
@@ -49,11 +52,13 @@ public class MinesController {
 
     @FXML
     public void initialize() {
-        budgetLabel.setText("Budget: €" + String.format("%.2f", App.getBedragen().getTotaleBedrag()));
-        geldLabel.setText("Geld: €" + String.format("%.2f", geld));
+        budgetLabel.setText("Budget: " + String.format("%.1f", App.getBedragen().getTotaleBedrag()));
+        geldLabel.setText("Huidig speelbedrag: " + String.format("%.1f", geld));
         buttons.addAll(List.of(button1, button2, button3, button4, button5, button6, button7, button8, button9, button10,
                 button11, button12, button13, button14, button15, button16, button17, button18, button19, button20,
                 button21, button22, button23, button24, button25));
+        
+        maakTafel();
         resetGame();
     }
 
@@ -67,9 +72,9 @@ public class MinesController {
             button.setDisable(false);
             button.setOpacity(1);
         }
-        
-        restartButton.setVisible(true);
-    }
+        magSpelen = false;  // Speelstatus resetten
+    }    
+    
 
     @FXML
     public void handleInzetButtonClick() {
@@ -80,56 +85,57 @@ public class MinesController {
                 App.getBedragen().geldInnen(inzet);
                 updateBudgetLabel();
                 geld = inzet;  
-                geldLabel.setText("Geld: €" + String.format("%.2f", geld));
+                geldLabel.setText("Huidig speelbedrag: " + String.format("%.1f", geld));
+                magSpelen = true;  // Speler mag nu spelen
             } else {
                 inzetField.setText("Onvoldoende budget!");
             }
         } catch (NumberFormatException e) {
             inzetField.setText("Ongeldige invoer!");
+        } finally {
+            inzetField.clear();
         }
     }
-
+    
     @FXML
-   
-public void handleButtonClick(ActionEvent event) {
-    Button clickedButton = (Button) event.getSource();
-    int index = buttons.indexOf(clickedButton);
-
-   
-    if (isBomb.get(index)) {
-   
-        Image bombImage = new Image(getClass().getResourceAsStream("/afbeeldingen/bom.png"));
-        ImageView imageView = new ImageView(bombImage);
-        setImageViewSize(imageView, clickedButton);
-        clickedButton.setGraphic(imageView);
-        clickedButton.setDisable(true);  
-       
-        geld = 0.0;
-        geldLabel.setText("Geld: €" + String.format("%.2f", geld));
-       
-        for (Button button : buttons) {
-            button.setDisable(true);
+    public void handleButtonClick(ActionEvent event) {
+        if (!magSpelen) {
+            System.out.println("Je moet eerst een inzet doen voordat je kunt spelen!");
+            return;
         }
-        
 
-        showGameOverMessage();
-        
-        resetGame();
-    } else {
-       
-        Image diamondImage = new Image(getClass().getResourceAsStream("/afbeeldingen/diamant.png"));
-        ImageView imageView = new ImageView(diamondImage);
-        setImageViewSize(imageView, clickedButton);
-        clickedButton.setGraphic(imageView);
-        clickedButton.setDisable(true);  
+        Button clickedButton = (Button) event.getSource();
+        int index = buttons.indexOf(clickedButton);
 
-        double winst = inzet * (vermenigvuldigingsFactor - 1); 
-        gewonnenGeld += winst;  
-        inzet *= vermenigvuldigingsFactor;  
-        geldLabel.setText("Geld: €" + String.format("%.2f", geld + gewonnenGeld));  
+        if (isBomb.get(index)) {
+            Image bombImage = new Image(getClass().getResourceAsStream("/afbeeldingen/bom.png"));
+            ImageView imageView = new ImageView(bombImage);
+            setImageViewSize(imageView, clickedButton);
+            clickedButton.setGraphic(imageView);
+            clickedButton.setDisable(true);  
+           
+            geld = 0.0;
+            geldLabel.setText("Huidig speelbedrag: " + String.format("%.1f", geld));
+           
+            for (Button button : buttons) {
+                button.setDisable(true);
+            }
+
+            showGameOverMessage();
+            resetGame();
+        } else {
+            Image diamondImage = new Image(getClass().getResourceAsStream("/afbeeldingen/diamant.png"));
+            ImageView imageView = new ImageView(diamondImage);
+            setImageViewSize(imageView, clickedButton);
+            clickedButton.setGraphic(imageView);
+            clickedButton.setDisable(true);  
+
+            double winst = inzet * (vermenigvuldigingsFactor - 1); 
+            gewonnenGeld += winst;  
+            inzet *= vermenigvuldigingsFactor;  
+            geldLabel.setText("Huidig speelbedrag: " + String.format("%.1f", geld + gewonnenGeld));  
+        }
     }
-}
-
 
     private void showGameOverMessage() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -141,46 +147,42 @@ public void handleButtonClick(ActionEvent event) {
 
     @FXML
     public void handleInnenButtonClick() {
-    double totaalBedrag = geld + gewonnenGeld; 
-    App.getBedragen().voegBedragToe(totaalBedrag);  
-    gewonnenGeld = 0.0;  
-    resetGame();  
-    updateBudgetLabel();  
-    geldLabel.setText("Geld: €0.00");  
-}
-
-    private void updateBudgetLabel() {
-        budgetLabel.setText("Budget: €" + String.format("%.2f", App.getBedragen().getTotaleBedrag()));
+        double totaalBedrag = geld + gewonnenGeld; 
+        App.getBedragen().voegBedragToe(totaalBedrag);  
+        gewonnenGeld = 0.0;  
+        resetGame();  
+        updateBudgetLabel();  
+        geldLabel.setText("Huidig speelbedrag: 0,0");  
     }
 
-    private void toonAfbeelding(Button button, String afbeeldingPad) {
-        Image image = new Image(getClass().getResourceAsStream(afbeeldingPad));
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(button.getWidth());
-        imageView.setFitHeight(button.getHeight());
-        imageView.setPreserveRatio(true);
-        button.setGraphic(imageView);
+    private void updateBudgetLabel() {
+        budgetLabel.setText("Budget: " + String.format("%.1f", App.getBedragen().getTotaleBedrag()));
     }
 
     private void setImageViewSize(ImageView imageView, Button button) {
-        
         double width = button.getWidth();
         double height = button.getHeight();
-        imageView.setFitWidth(width);
-        imageView.setFitHeight(height);
-        imageView.setPreserveRatio(true);  
+        imageView.setFitWidth(Math.min(width, height)); 
+        imageView.setFitHeight(Math.min(width, height)); 
+        imageView.setPreserveRatio(true); 
+        imageView.setSmooth(true);        
+        imageView.setCache(true);        
+        button.setGraphic(imageView);   
+    }
+
+    public void maakTafel(){
+        Rectangle tafel = new Rectangle(0, 80, 640, 590);
+        tafel.setFill(Color.GREEN);
+        anchorPane.getChildren().add(tafel);
+        tafel.toBack();
     }
 
     @FXML
     public void restartGame() {
-       
         resetGame();
-
         geld = 0.0;
-        geldLabel.setText("Geld: €" + String.format("%.2f", geld));
-        
+        geldLabel.setText("Huidig speelbedrag: " + String.format("%.1f", geld));
         inzet = 0.0;
         inzetField.clear();
-
     }
 }
