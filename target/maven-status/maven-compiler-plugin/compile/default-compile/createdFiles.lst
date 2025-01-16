@@ -1,9 +1,12 @@
 taak\grotetaakcasi\AfbeeldingVerplaatsing.class
 taak\grotetaakcasi\HogerLagerModel.class
 taak\grotetaakcasi\Kaart.class
+<<<<<<< HEAD
 taak\grotetaakcasi\KaartenDeck$Kaart.class
 taak\grotetaakcasi\BedragenView.class
 taak\grotetaakcasi\BlackJackView.class
+=======
+>>>>>>> 75ff89e5e40d1b1efd192cfa215d589d28d10a4b
 taak\grotetaakcasi\App1.class
 taak\grotetaakcasi\BlackjackController$1.class
 taak\grotetaakcasi\KaartenDeck.class
@@ -17,6 +20,10 @@ taak\grotetaakcasi\App.class
 module-info.class
 taak\grotetaakcasi\Verplaatsen.class
 taak\grotetaakcasi\HogerLagerMenuController.class
+<<<<<<< HEAD
+=======
+taak\grotetaakcasi\rectangle.class
+>>>>>>> 75ff89e5e40d1b1efd192cfa215d589d28d10a4b
 taak\grotetaakcasi\TafelController.class
 taak\grotetaakcasi\PakKaarten.class
 taak\grotetaakcasi\BlackJackModel.class
