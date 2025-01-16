@@ -7,10 +7,11 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taak.grotetaakcasi.mines.MinesController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="465.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taak.grotetaakcasi.mines.MinesController">
    <children>
-      <GridPane gridLinesVisible="true" layoutX="167.0" layoutY="75.0" maxHeight="250.0" maxWidth="250.0" minHeight="250.0" minWidth="250.0" prefHeight="250.0" prefWidth="250.0">
+      <GridPane fx:id="roosterGridplane" gridLinesVisible="true" layoutX="175.0" layoutY="146.0" maxHeight="250.0" maxWidth="250.0" minHeight="250.0" minWidth="250.0" prefHeight="250.0" prefWidth="250.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -53,12 +54,22 @@
             <Button fx:id="button25" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="59.0" prefWidth="67.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label fx:id="geldLabel" layoutX="438.0" layoutY="335.0" prefHeight="50.0" prefWidth="94.0" />
-      <TextField fx:id="inzetField" layoutX="34.0" layoutY="24.0" />
-      <Button fx:id="inzetButton" layoutX="196.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleInzetButtonClick" text="zet in" />
-      <Button fx:id="terugNaarMenuButton" layoutX="518.0" layoutY="24.0" mnemonicParsing="false" onAction="#gaNaarMenu" text="menu" />
-      <Label fx:id="budgetLabel" layoutX="44.0" layoutY="146.0" prefHeight="25.0" prefWidth="99.0" />
-      <Button fx:id="innenButton" layoutX="43.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleInnenButtonClick" text="innen" />
-      <Button fx:id="restartButton" layoutX="356.0" layoutY="24.0" mnemonicParsing="false" onAction="#restartGame" text="opnieuw spelen" />
+      <Label fx:id="geldLabel" layoutX="179.0" layoutY="396.0" prefHeight="60.0" prefWidth="147.0" />
+      <TextField fx:id="inzetField" layoutX="438.0" layoutY="328.0" />
+      <Button fx:id="inzetButton" layoutX="438.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleInzetButtonClick" prefHeight="25.0" prefWidth="149.0" text="zet in" />
+      <Button fx:id="terugNaarMenuButton" layoutX="533.0" layoutY="32.0" mnemonicParsing="false" onAction="#gaNaarMenu" text="menu" />
+      <Label fx:id="budgetLabel" layoutX="14" layoutY="14" prefHeight="27.0" prefWidth="190.0" text="Budget: ">
+         <font>
+            <Font size="18.0" />
+         </font>
+
+      </Label>
+      <Button fx:id="innenButton" layoutX="328.0" layoutY="413.0" mnemonicParsing="false" onAction="#handleInnenButtonClick" text="innen" />
+      <Label fx:id="minesLabel" layoutX="227.0" layoutY="6.0" text="MINES" textFill="#43b065">
+         <font>
+            <Font name="System Bold Italic" size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="hoeveelLabel" layoutX="439.0" layoutY="304.0" prefHeight="17.0" prefWidth="147.0" text="hoeveel wil je inzetten?" />
    </children>
 </AnchorPane>

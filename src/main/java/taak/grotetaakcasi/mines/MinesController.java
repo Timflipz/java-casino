@@ -18,6 +18,10 @@ import javafx.scene.control.Alert;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import taak.grotetaakcasi.App;
 
 public class MinesController {
@@ -33,7 +37,12 @@ public class MinesController {
     @FXML private Label budgetLabel; 
     @FXML private Button terugNaarMenuButton;
     @FXML private Button innenButton;
-    @FXML private Button restartButton;  
+    @FXML private Label minesLabel;
+    @FXML private Label hoeveelLabel;
+    @FXML private AnchorPane anchorPane;
+    @FXML private GridPane roosterGridPane;
+    
+  
 
     private double geld = 0.0;  
     private double inzet = 0.0;
@@ -49,11 +58,13 @@ public class MinesController {
 
     @FXML
     public void initialize() {
-        budgetLabel.setText("Budget: €" + String.format("%.2f", App.getBedragen().getTotaleBedrag()));
-        geldLabel.setText("Geld: €" + String.format("%.2f", geld));
+        budgetLabel.setText("Budget: " + String.format("%.1f", App.getBedragen().getTotaleBedrag()));
+        geldLabel.setText("Huidige speelbedrag: " + String.format("%.1f", geld));
         buttons.addAll(List.of(button1, button2, button3, button4, button5, button6, button7, button8, button9, button10,
                 button11, button12, button13, button14, button15, button16, button17, button18, button19, button20,
                 button21, button22, button23, button24, button25));
+        
+        maakTafel();
         resetGame();
     }
 
@@ -67,9 +78,9 @@ public class MinesController {
             button.setDisable(false);
             button.setOpacity(1);
         }
-        
-        restartButton.setVisible(true);
-    }
+    }    
+       
+    
 
     @FXML
     public void handleInzetButtonClick() {
@@ -80,23 +91,24 @@ public class MinesController {
                 App.getBedragen().geldInnen(inzet);
                 updateBudgetLabel();
                 geld = inzet;  
-                geldLabel.setText("Geld: €" + String.format("%.2f", geld));
+                geldLabel.setText("Huidige speelbedrag: " + String.format("%.1f", geld));
             } else {
                 inzetField.setText("Onvoldoende budget!");
             }
         } catch (NumberFormatException e) {
             inzetField.setText("Ongeldige invoer!");
+        } finally {
+        inzetField.clear();
         }
     }
-
+    
     @FXML
-   
-public void handleButtonClick(ActionEvent event) {
-    Button clickedButton = (Button) event.getSource();
-    int index = buttons.indexOf(clickedButton);
+    public void handleButtonClick(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        int index = buttons.indexOf(clickedButton);
 
    
-    if (isBomb.get(index)) {
+         if (isBomb.get(index)) {
    
         Image bombImage = new Image(getClass().getResourceAsStream("/afbeeldingen/bom.png"));
         ImageView imageView = new ImageView(bombImage);
@@ -105,7 +117,7 @@ public void handleButtonClick(ActionEvent event) {
         clickedButton.setDisable(true);  
        
         geld = 0.0;
-        geldLabel.setText("Geld: €" + String.format("%.2f", geld));
+        geldLabel.setText("Huidige speelbedrag: " + String.format("%.1f", geld));
        
         for (Button button : buttons) {
             button.setDisable(true);
@@ -126,7 +138,7 @@ public void handleButtonClick(ActionEvent event) {
         double winst = inzet * (vermenigvuldigingsFactor - 1); 
         gewonnenGeld += winst;  
         inzet *= vermenigvuldigingsFactor;  
-        geldLabel.setText("Geld: €" + String.format("%.2f", geld + gewonnenGeld));  
+        geldLabel.setText("Huidige speelbedrag: " + String.format("%.1f", geld + gewonnenGeld));  
     }
 }
 
@@ -146,11 +158,11 @@ public void handleButtonClick(ActionEvent event) {
     gewonnenGeld = 0.0;  
     resetGame();  
     updateBudgetLabel();  
-    geldLabel.setText("Geld: €0.00");  
+    geldLabel.setText("Huidige speelbedrag: 0,0");  
 }
 
     private void updateBudgetLabel() {
-        budgetLabel.setText("Budget: €" + String.format("%.2f", App.getBedragen().getTotaleBedrag()));
+        budgetLabel.setText("Budget: " + String.format("%.1f", App.getBedragen().getTotaleBedrag()));
     }
 
     private void toonAfbeelding(Button button, String afbeeldingPad) {
@@ -170,14 +182,19 @@ public void handleButtonClick(ActionEvent event) {
         imageView.setFitHeight(height);
         imageView.setPreserveRatio(true);  
     }
-
+    public void maakTafel(){
+        Rectangle tafel = new Rectangle(0, 90, 640, 590);
+        tafel.setFill(Color.LIGHTGREEN);
+        anchorPane.getChildren().add(tafel);
+        tafel.toBack();
+    }
     @FXML
     public void restartGame() {
        
         resetGame();
 
         geld = 0.0;
-        geldLabel.setText("Geld: €" + String.format("%.2f", geld));
+        geldLabel.setText("Huidig speelbedrag: " + String.format("%.1f", geld));
         
         inzet = 0.0;
         inzetField.clear();
