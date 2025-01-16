@@ -27,9 +27,6 @@ public class BlackjackController implements Initializable {
     private BlackJackView blackjackview;
     private KaartView kaartView;
     private BedragenView bedragenView;
-    
-    @FXML
-    private Button volgendSpelButton;
 
     @FXML
     private Label bjlabel;
@@ -89,7 +86,6 @@ public class BlackjackController implements Initializable {
         spelersKaartenLabel.setVisible(true);
         
         bedragenView.getBudgetLabel().setText("Budget: " + model.getBudget());
-        
 
         model.startGame();
         kaartView.kaartenToevoegenAanAfbeeldingenlijst();
@@ -102,7 +98,7 @@ public class BlackjackController implements Initializable {
     
     @FXML
     public void inzetten(ActionEvent event) throws IOException {
-        double inzet = Double.parseDouble(inzetText.getText());
+        double inzet = Double.parseDouble(inzetText.getText());//BRON CHATGPT
         if (model.isInzetGeldig(inzet)) {
             model.setInzet(inzet);
             
@@ -134,7 +130,7 @@ public class BlackjackController implements Initializable {
             double inzet = Double.parseDouble(inzetText.getText());
             String uitslag = model.bepaalUitslag(inzet);
             uitslagLabel.setText(uitslag);
-            dealerImageViews.get(0).setImage(model.getDealerKaartAfbeelding(0));
+            kaartView.dealerKaartOnthullen();
             hitKnop.setDisable(true);
             standKnop.setDisable(true);
             volgendSpelMetTijd();
@@ -145,13 +141,11 @@ public class BlackjackController implements Initializable {
     @FXML
     public void standen(ActionEvent event) {
         
-        kaartView.dealerKaartNaStandenOnthullen();
+        kaartView.dealerKaartOnthullen();
 
         model.dealerSpelen();
         kaartView.kaartenToevoegenAanAfbeeldingenlijst();
-        kaartView.dealerKaartenZichtbaarMaken(model.getDealerHandGrootte(),
-                                              spelerImageViews,
-                                              dealerImageViews);
+        kaartView.dealerKaartenZichtbaarMaken(model.getDealerHandGrootte(),spelerImageViews,dealerImageViews);
 
         double inzet = Double.parseDouble(inzetText.getText());
         String uitslag = model.bepaalUitslag(inzet);
@@ -176,7 +170,7 @@ public class BlackjackController implements Initializable {
         zetInKnop.setDisable(false);
     }
 
-    public void volgendSpelMetTijd() {
+    public void volgendSpelMetTijd() { //BRON CHATGPT
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override

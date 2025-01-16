@@ -35,7 +35,5 @@ public class SpelerEnDealer {
 
     public void resetHand() {
         hand.clear();
-    }
-
-    
+    }  
 }

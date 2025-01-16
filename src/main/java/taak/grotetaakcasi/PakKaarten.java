@@ -14,7 +14,7 @@ public class PakKaarten {
     private ArrayList<Kaart> kaarten = new ArrayList<>();
 
     public PakKaarten() {
-        String[] symbolen = {"Harten", "Schoppen", "Ruiten", "Klaveren"};
+        String[] symbolen = {"Harten", "Schoppen", "Ruiten", "Klaveren"}; //bron chatgpt; veel makkelijker dan arraylist
         String[] kaartNrs = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Boer", "Dame", "Heer", "Aas"}; //bron chatgpt; veel makkelijker dan arraylist
 
         for (String symbool : symbolen) {

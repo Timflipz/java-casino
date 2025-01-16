@@ -52,8 +52,4 @@ public class TafelController {
     public void gaNaarMenu(ActionEvent event) throws IOException {
             App.setRoot("menu");
     }
-
-    @FXML
-    private void update(KeyEvent event) {
-    }
 }

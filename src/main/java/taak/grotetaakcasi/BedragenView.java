@@ -12,13 +12,13 @@ public class BedragenView {
         public BedragenView(AnchorPane root) {
             
         budgetLabel = new Label("Budget: " + App.getBedragen());
-        budgetLabel.setLayoutX(14);
+        budgetLabel.setLayoutX(14); 
         budgetLabel.setLayoutY(14);
-        budgetLabel.setFont(new Font(18));
+        budgetLabel.setFont(new Font(18)); //BRON CHATGPT
 
         inzetLabel = new Label("Inzet: ");
-        inzetLabel.setLayoutX(310);
-        inzetLabel.setLayoutY(447);
+        inzetLabel.setLayoutX(275);
+        inzetLabel.setLayoutY(485);
         inzetLabel.setFont(new Font(24));
         inzetLabel.setText("Inzet: ");
         inzetLabel.setTextFill(Color.GOLD);

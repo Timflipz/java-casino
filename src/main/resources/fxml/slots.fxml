@@ -14,31 +14,40 @@
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
    <children>
-      <AnchorPane fx:id="rootView" onMouseClicked="#handleMouseClick" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: &quot;C:\Users\yani thijs\OneDrive\Pictures\afbeelding slotmachine.png&quot;;">
+      <AnchorPane fx:id="rootView" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('/images/slotmachine.png'); -fx-background-size: cover;">
          <children>
+                   <Label fx:id="algemeenBudgetLabel" layoutX="29.0" layoutY="26.0" prefHeight="27.0" prefWidth="190.0" text="Budget: ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
             <Label fx:id="label1Afbeelding" layoutX="50.0" layoutY="50.0" prefHeight="114.0" prefWidth="120.0">
                <graphic>
-                  <ImageView fx:id="imageView1" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic></Label>
+                  <ImageView fx:id="imageView1" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </Label>
             <Label fx:id="label2Afbeelding" layoutX="250.0" layoutY="50.0" prefHeight="100.0" prefWidth="120.0">
                <graphic>
-                  <ImageView fx:id="imageView2" fitHeight="100.0" fitWidth="100.0" layoutX="150.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic></Label>
-            <Label fx:id="label3Afbeelding" layoutX="449.0" layoutY="50.0" prefHeight="100.0" prefWidth="131.0">
+                  <ImageView fx:id="imageView2" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </Label>
+            <Label fx:id="label3Afbeelding" layoutX="450.0" layoutY="50.0" prefHeight="100.0" prefWidth="131.0">
                <graphic>
-                  <ImageView fx:id="imageView3" fitHeight="100.0" fitWidth="100.0" layoutX="250.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic></Label>
-            <Button fx:id="spinKnop" layoutX="524.0" layoutY="377.0" mnemonicParsing="false" onAction="#handleSpin" onMouseClicked="#handleMouseClick" prefHeight="78.0" prefWidth="113.0" text="spin">
+                  <ImageView fx:id="imageView3" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </Label>
+            <Button fx:id="spinKnop" layoutX="524.0" layoutY="377.0" mnemonicParsing="false" onAction="#handleSpin" prefHeight="78.0" prefWidth="113.0" text="Spin">
                <font>
                   <Font size="18.0" />
-               </font></Button>
-            <Label fx:id="labelInzet" layoutX="61.0" layoutY="309.0" prefHeight="44.0" prefWidth="104.0" text="geef je inzet:">
+               </font>
+            </Button>
+            <Label fx:id="labelInzet" layoutX="61.0" layoutY="309.0" prefHeight="44.0" prefWidth="104.0" text="Geef je inzet:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
             <Label fx:id="labelFoutmelding" layoutX="271.0" layoutY="171.0" prefHeight="191.0" prefWidth="278.0" />
-            <Label fx:id="lblwinsttext" layoutX="63.0" layoutY="356.0" prefHeight="58.0" prefWidth="194.0" text="je krijgt terug:">
+            <Label fx:id="lblwinsttext" layoutX="63.0" layoutY="356.0" prefHeight="58.0" prefWidth="194.0" text="Je krijgt terug:">
                <font>
                   <Font size="18.0" />
                </font>
@@ -47,8 +56,9 @@
             <Label fx:id="labelWinst" layoutX="257.0" layoutY="363.0" prefHeight="44.0" prefWidth="253.0">
                <font>
                   <Font size="18.0" />
-               </font></Label>
-            <Label fx:id="lblWinstTotaal" layoutX="63.0" layoutY="416.0" prefHeight="44.0" prefWidth="120.0" text="totale winst:">
+               </font>
+            </Label>
+            <Label fx:id="lblWinstTotaal" layoutX="63.0" layoutY="416.0" prefHeight="44.0" prefWidth="120.0" text="Totale winst:">
                <font>
                   <Font size="18.0" />
                </font>
@@ -58,7 +68,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="terugNaarMenuButton" layoutX="544.0" layoutY="330.0" mnemonicParsing="false" onAction="#gaNaarMenu" prefHeight="26.0" prefWidth="71.0" text="menu" />
+            <Button fx:id="terugNaarMenuButton" layoutX="544.0" layoutY="330.0" mnemonicParsing="false" onAction="#gaNaarMenu" prefHeight="26.0" prefWidth="71.0" text="Menu" />
          </children>
       </AnchorPane>
    </children>

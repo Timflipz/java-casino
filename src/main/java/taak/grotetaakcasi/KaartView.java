@@ -23,8 +23,7 @@ public class KaartView {
         this.dealerImageViews = dealerImageViews;
     }
     
-    public void kaartenZichtbaarMaken(int spelerhandgrootte,
-                                      int dealerhandgrootte,
+    public void kaartenZichtbaarMaken(int spelerhandgrootte,int dealerhandgrootte,
                                       ArrayList<ImageView> spelerImageViews,
                                       ArrayList<ImageView> dealerImageViews){
         
@@ -52,9 +51,7 @@ public class KaartView {
         }
     }
     
-    
-
-    public void kaartBeweging(ImageView kaart, double eindX, double eindY, double duurInSeconden) {
+    public void kaartBeweging(ImageView kaart, double eindX, double eindY, double duurInSeconden) { //BRON CHATGPT
         kaart.setLayoutX(500);  
         kaart.setLayoutY(122);
         kaart.setFitWidth(87);  
@@ -98,8 +95,8 @@ public class KaartView {
         ImageView omgekeerdeKaart = new ImageView();
         omgekeerdeKaart.setImage(model.getOmgekeerdeKaartAfbeelding());
         roofView.getChildren().add(omgekeerdeKaart);
-        omgekeerdeKaart.setFitWidth(87); 
-        omgekeerdeKaart.setFitHeight(123);
+        omgekeerdeKaart.setFitWidth(87); //BRON CHATGPT
+        omgekeerdeKaart.setFitHeight(123); //BRON CHATGPT
         double eindX = 66;  
         double eindY = 122; 
         kaartBeweging(omgekeerdeKaart, eindX, eindY, 0.5);
@@ -161,7 +158,7 @@ public class KaartView {
     }
     }
     
-    public void dealerKaartNaStandenOnthullen(){
+    public void dealerKaartOnthullen(){
         dealerImageViews.get(0).setImage(model.getDealerKaartAfbeelding(0));
     }
 }

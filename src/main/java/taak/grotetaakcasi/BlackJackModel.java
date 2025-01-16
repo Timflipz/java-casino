@@ -54,7 +54,7 @@ public class BlackJackModel {
             uitslag = "De dealer wint";
         }else if (dealerScore > 21 || spelerScore > dealerScore) {
             App.getBedragen().voegBedragToe(inzet * 2); 
-            uitslag = "Je wint!";
+            uitslag = "U wint!";
         } else if (dealerScore == spelerScore) {
             App.getBedragen().voegBedragToe(inzet);  
             uitslag = "Het is een gelijkspel.";

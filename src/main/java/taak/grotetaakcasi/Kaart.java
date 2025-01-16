@@ -22,22 +22,19 @@ public class Kaart {
     }
 
     public int getWaarde() {
-        if (nummer.equals("Boer") || nummer.equals("Dame") || nummer.equals("Heer")) {
+        if (nummer == "Boer" || nummer == "Dame" || nummer == "Heer") {
             return 10;
-        } else if (nummer.equals("Aas")) {
+        } else if (nummer == "Aas") {
             return 11;
         } else {
-            return Integer.parseInt(nummer);
+            return Integer.parseInt(nummer); //BRON CHATGPT
         }
     }
 
     public Image getAfbeelding() {
-        String afb = "/afbeeldingen/" + symbool + "_" + nummer + ".png";
-        return new Image(getClass().getResourceAsStream(afb));
+        String afb = "/afbeeldingen/" + symbool + "_" + nummer + ".png";//BRON CHATGPT
+        return new Image(getClass().getResourceAsStream(afb));//BRON CHATGPT
     }
-         
-    
-    public String toString() {
-        return symbool + " " + nummer;
-    }
+
+
 }

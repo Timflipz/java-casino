@@ -72,13 +72,13 @@ public class MinesController {
             button.setDisable(false);
             button.setOpacity(1);
         }
-        magSpelen = false;  // Speelstatus resetten
+        magSpelen = false; 
     }    
     
 
     @FXML
     public void handleInzetButtonClick() {
-        try {
+
             double nieuweInzet = Double.parseDouble(inzetField.getText());
             if (App.getBedragen().getTotaleBedrag() >= nieuweInzet) {
                 inzet = nieuweInzet;
@@ -86,16 +86,14 @@ public class MinesController {
                 updateBudgetLabel();
                 geld = inzet;  
                 geldLabel.setText("Huidig speelbedrag: " + String.format("%.1f", geld));
-                magSpelen = true;  // Speler mag nu spelen
+                magSpelen = true;  
             } else {
                 inzetField.setText("Onvoldoende budget!");
             }
-        } catch (NumberFormatException e) {
-            inzetField.setText("Ongeldige invoer!");
-        } finally {
+
             inzetField.clear();
         }
-    }
+    
     
     @FXML
     public void handleButtonClick(ActionEvent event) {

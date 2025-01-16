@@ -34,7 +34,7 @@ public class BlackJackView {
             stapelAfbeelding.setLayoutY(y);
             stapelAfbeelding.setFitHeight(123.0);
             stapelAfbeelding.setFitWidth(87.0);
-            stapelAfbeelding.setImage(new Image(getClass().getResourceAsStream("/afbeeldingen/OmgekeerdeKaart.png")));
+            stapelAfbeelding.setImage(new Image(getClass().getResourceAsStream("/afbeeldingen/OmgekeerdeKaart.png")));  //BRON CHATGPT
             roofView.getChildren().add(stapelAfbeelding);
         }
     }

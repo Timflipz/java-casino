@@ -39,17 +39,17 @@ public class SpeelbordController {
         maakTafel();
     }
     
+    public void slotsOpenen() throws IOException{
+        App.setRoot("slots");
+    }
+    
     @FXML
     public void blackJackOpenen() throws IOException{
         App.setRoot("blackjack");
     }
     
     public void hogerLagerOpenen() throws IOException{
-
         App.setRoot("HogerLagerMenu"); 
-
-        App.setRoot("hogerLagerMenu"); 
-
     } 
 
     public void openMines() throws IOException{
@@ -70,9 +70,4 @@ public class SpeelbordController {
     private void update(ActionEvent event) throws IOException {
         App.setRoot("Tafel");
     }
-    @FXML
-     public void slotsOpenen() throws IOException{
-        App.setRoot("slots"); 
-     }    
-
 }
