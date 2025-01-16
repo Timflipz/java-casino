@@ -36,7 +36,11 @@ public class SpeelbordController {
     }
     
     public void hogerLagerOpenen() throws IOException{
-        App.setRoot("hogerlager"); 
+<<<<<<< HEAD
+        App.setRoot("HogerLagerMenu"); 
+=======
+        App.setRoot("hogerLagerMenu"); 
+>>>>>>> 75ff89e5e40d1b1efd192cfa215d589d28d10a4b
     } 
 
     @FXML

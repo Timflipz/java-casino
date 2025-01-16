@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.taakcasino.HogerLagerMenuController">
+   <children>
+      <Pane fx:id="BeginScherm" prefHeight="411.0" prefWidth="614.0">
+         <children>
+            <Button fx:id="OkeButton" layoutX="263.0" layoutY="274.0" mnemonicParsing="false" onAction="#Activeren" prefHeight="77.0" prefWidth="90.0" text="OK" textFill="#e62d2d">
+               <font>
+                  <Font name="System Bold Italic" size="27.0" />
+               </font>
+            </Button>
+            <TextField fx:id="Inzet" alignment="TOP_LEFT" layoutX="125.0" layoutY="132.0" prefHeight="52.0" prefWidth="365.0" promptText="Inzet">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </TextField>
+            <Label fx:id="OkeLabel" layoutX="211.0" layoutY="184.0" prefHeight="83.0" prefWidth="193.0" text="Klik daarna op OK" textAlignment="CENTER" textFill="#f8f8f8">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="HeleSpel" nodeOrientation="RIGHT_TO_LEFT" prefHeight="90.0" prefWidth="621.0">
+         <children>
+            <Label fx:id="BeginLabel" layoutX="101.0" layoutY="-13.0" prefHeight="138.0" prefWidth="419.0" text="Hoeveel zet je in? " textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="51.0" />
+               </font>
+            </Label>
+            <Label fx:id="InzetOnthouden" layoutX="462.0" layoutY="5.0" prefHeight="17.0" prefWidth="159.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="SpeelPane" layoutX="7.0" layoutY="1.0" prefHeight="410.0" prefWidth="614.0">
+         <children>
+            <Button fx:id="speelButton" layoutX="249.0" layoutY="297.0" mnemonicParsing="false" onAction="#Startspel" prefHeight="65.0" prefWidth="115.0" text="Speel" />
+            <Label fx:id="JuistFout" layoutX="382.0" layoutY="104.0" prefHeight="90.0" prefWidth="166.0">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Button fx:id="hogerButton" layoutX="86.0" layoutY="297.0" mnemonicParsing="false" onAction="#HogerKnop" prefHeight="65.0" prefWidth="115.0" text="Hoger " />
+            <Button fx:id="lagerButton" layoutX="408.0" layoutY="297.0" mnemonicParsing="false" onAction="#lagerKnop" prefHeight="65.0" prefWidth="115.0" text="Lager" />
+            <Button fx:id="endGame" layoutX="541.0" layoutY="362.0" mnemonicParsing="false" onAction="#eindigen" prefHeight="34.0" prefWidth="48.0" text="End Game">
+               <font>
+                  <Font name="System Bold" size="7.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="AfbeeldingKaarten" fitHeight="171.0" fitWidth="133.0" layoutX="77.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" />
+            <Pane fx:id="AfbeeldingPane" layoutY="37.0" prefHeight="242.0" prefWidth="614.0">
+               <children>
+                  <ImageView fx:id="AfbeeldingOnder" fitHeight="171.0" fitWidth="115.0" layoutX="494.0" layoutY="24.0" pickOnBounds="true" />
+                  <ImageView fx:id="AfbeeldingMidden" fitHeight="171.0" fitWidth="115.0" layoutX="471.0" layoutY="24.0" pickOnBounds="true" />
+                  <ImageView fx:id="AfbeeldingBoven" fitHeight="171.0" fitWidth="115.0" layoutX="471.0" layoutY="24.0" pickOnBounds="true" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane fx:id="EindPane" prefHeight="411.0" prefWidth="621.0" visible="false">
+         <children>
+            <Label fx:id="afsluiten" layoutX="54.0" layoutY="73.0" prefHeight="351.0" prefWidth="514.0" textAlignment="CENTER" textFill="#fb0202" wrapText="true">
+               <font>
+                  <Font name="System Bold Italic" size="55.0" />
+               </font>
+            </Label>
+            <Button fx:id="endGame1" layoutX="519.0" layoutY="345.0" mnemonicParsing="false" onAction="#eindigen" prefHeight="52.0" prefWidth="79.0" text="End Game">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+   <cursor>
+      <Cursor fx:constant="E_RESIZE" />
+   </cursor>
+</AnchorPane>

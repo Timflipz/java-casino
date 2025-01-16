@@ -22,6 +22,7 @@
       </Label>
 
       <Button fx:id="hogerLagerButton" layoutX="29" layoutY="98.0" mnemonicParsing="false" onAction="#hogerLagerOpenen" prefHeight="102.0" prefWidth="261.0" text="Hoger Lager" textFill="#db00ff">
+
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
