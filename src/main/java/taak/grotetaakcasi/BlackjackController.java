@@ -31,7 +31,6 @@ public class BlackjackController implements Initializable {
     @FXML
     private Button volgendSpelButton;
 
-
     @FXML
     private Label bjlabel;
 
@@ -143,7 +142,7 @@ public class BlackjackController implements Initializable {
 
     @FXML
     public void standen(ActionEvent event) {
-        dealerImageViews.get(0).setImage(model.getDealerKaartAfbeelding(0));
+        kaartView.dealerKaartNaStandenOnthullen();
 
         model.dealerSpelen();
         kaartView.kaartenToevoegenAanAfbeeldingenlijst();

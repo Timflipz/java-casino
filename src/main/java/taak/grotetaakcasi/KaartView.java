@@ -160,4 +160,8 @@ public class KaartView {
         dealerKaart.setVisible(false);
     }
     }
+    
+    public void dealerKaartNaStandenOnthullen(){
+        dealerImageViews.get(0).setImage(model.getDealerKaartAfbeelding(0));
+    }
 }
